@@ -4,11 +4,12 @@ package br.com.rrc.enterprise.service;
 import java.util.List;
 
 import br.com.rrc.enterprise.beans.Comando;
+import br.com.rrc.enterprise.beans.Direcao;
 import br.com.rrc.enterprise.beans.Posicao;
 
 public class MissaoService {
 
-	public String explorar(String[][] mapa, Posicao posicao, String direcao, List<Comando> comandos) {
+	public String explorar(String[][] mapa, Posicao posicao, Direcao direcao, List<Comando> comandos) {
 	
 		String sonda = "SONDA :-> ";
 		
@@ -24,13 +25,13 @@ public class MissaoService {
 
 			case ESQUERDA:
 
-				direcao = rosaDosVetos("L", direcao);
+				direcao = rosaDosVetos(Comando.ESQUERDA, direcao);
 				mapa [posicao.getLatitude().get()][posicao.getLongitude().get()] = sonda + direcao;
 				break;
 
 			case DIREITA:
 
-				direcao = rosaDosVetos("R", direcao);
+				direcao = rosaDosVetos(Comando.DIREITA, direcao);
 				mapa [posicao.getLatitude().get()][posicao.getLongitude().get()] = sonda + direcao;
 				break;
 
@@ -38,23 +39,22 @@ public class MissaoService {
 
 				switch (direcao) {
 				
-				case "N":
-
+				case NORTE:
 					
 					posicao.getLongitude().incrementAndGet();
 					break;
 
-				case "E":
+				case LESTE:
 
 					posicao.getLatitude().incrementAndGet();
 					break;
 
-				case "S":
+				case SUL:
 
 					posicao.getLongitude().decrementAndGet();
 					break;
 
-				case "W":
+				case OESTE:
 
 					posicao.getLatitude().decrementAndGet();
 					break;
@@ -82,24 +82,24 @@ public class MissaoService {
 	
 	}
 	
-	private String rosaDosVetos(String comando, String direcao) {
+	private Direcao rosaDosVetos(Comando comando, Direcao direcao) {
 
-		if ("N".equals(direcao) &&  "L".equals(comando)) {
-			return "W";
-		} else if ("N".equals(direcao) &&  "R".equals(comando)) {
-			return "E";
-		} else if ("E".equals(direcao) &&  "L".equals(comando)) {
-			return "N";
-		} else if ("E".equals(direcao) &&  "R".equals(comando)) {
-			return "S"; 
-		} else if ("S".equals(direcao) &&  "L".equals(comando)) {
-			return "E";
-		} else if ("S".equals(direcao) &&  "R".equals(comando)) {
-			return "W";
-		} else if ("W".equals(direcao) &&  "L".equals(comando)) {
-			return "S";
-		} else if ("W".equals(direcao) &&  "R".equals(comando)) {
-			return "S";
+		if (Direcao.NORTE.equals(direcao) &&  Comando.ESQUERDA.equals(comando)) {
+			return Direcao.OESTE;
+		} else if (Direcao.NORTE.equals(direcao) &&  Comando.DIREITA.equals(comando)) {
+			return Direcao.LESTE;
+		} else if (Direcao.LESTE.equals(direcao) &&  Comando.ESQUERDA.equals(comando)) {
+			return Direcao.NORTE;
+		} else if (Direcao.LESTE.equals(direcao) &&  Comando.DIREITA.equals(comando)) {
+			return Direcao.SUL; 
+		} else if (Direcao.SUL.equals(direcao) &&  Comando.ESQUERDA.equals(comando)) {
+			return Direcao.LESTE;
+		} else if (Direcao.SUL.equals(direcao) &&  Comando.DIREITA.equals(comando)) {
+			return Direcao.OESTE;
+		} else if (Direcao.OESTE.equals(direcao) &&  Comando.ESQUERDA.equals(comando)) {
+			return Direcao.SUL;
+		} else if (Direcao.OESTE.equals(direcao) &&  Comando.DIREITA.equals(comando)) {
+			return Direcao.SUL;
 		}
 		return direcao;
 	}
