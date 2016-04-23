@@ -1,12 +1,14 @@
 package br.com.rrc.explore.enterprise.service;
 
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.junit.Assert;
 import org.junit.Test;
 
+import br.com.rrc.enterprise.beans.Comando;
+import br.com.rrc.enterprise.beans.Posicao;
 import br.com.rrc.enterprise.service.MissaoService;
-import br.com.rrc.explore.enterprise.beans.Posicao;
 
 public class TestMissaoMarte {
 	
@@ -21,7 +23,9 @@ public class TestMissaoMarte {
 		Posicao posicao = new Posicao(new AtomicInteger(posicaoEntradaX), new AtomicInteger(posicaoEntradaY));
 		String direcao = "N";
 
-		String comandos = "LMLMLMLMM";
+		String instrucoes = "LMLMLMLMM";
+		
+		List<Comando> comandos = Comando.parseString2Comando(instrucoes); 
 
 		MissaoService missaoMarteService = new MissaoService();
 		String resultaMissao = missaoMarteService.explorar(mapa, posicao, direcao, comandos);

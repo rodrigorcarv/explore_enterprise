@@ -1,39 +1,40 @@
 package br.com.rrc.enterprise.service;
 
-import br.com.rrc.explore.enterprise.beans.Posicao;
+
+import java.util.List;
+
+import br.com.rrc.enterprise.beans.Comando;
+import br.com.rrc.enterprise.beans.Posicao;
 
 public class MissaoService {
 
-
-	public String explorar(String[][] mapa, Posicao posicao, String direcao, String comandos) {
-
-		char comando[] = comandos.toCharArray();
-
+	public String explorar(String[][] mapa, Posicao posicao, String direcao, List<Comando> comandos) {
+	
 		String sonda = "SONDA :-> ";
 		
-		for (int i = 0; i < comando.length; i++) {
-
+		for (Comando comando : comandos) {
+		
 			System.out.println("ENTRADA ************************************************* " );
-			System.out.format("INSTRUCAO: %s", comando[i]);
+			System.out.format("INSTRUCAO: %s", comando);
 			System.out.format("\nDIRECAO  : %s", direcao);
 			System.out.format("\n[X][Y] ->: %s %s" , posicao.getLatitude(), posicao.getLongitude());
 			System.out.println("\nENTRADA ************************************************* " );
 			
-			switch (comando[i]) {
+			switch (comando) {
 
-			case 'L':
+			case ESQUERDA:
 
 				direcao = rosaDosVetos("L", direcao);
 				mapa [posicao.getLatitude().get()][posicao.getLongitude().get()] = sonda + direcao;
 				break;
 
-			case 'R':
+			case DIREITA:
 
 				direcao = rosaDosVetos("R", direcao);
 				mapa [posicao.getLatitude().get()][posicao.getLongitude().get()] = sonda + direcao;
 				break;
 
-			case 'M':
+			case MOVER:
 
 				switch (direcao) {
 				
@@ -68,7 +69,7 @@ public class MissaoService {
 				break;
 			}
 			System.out.println("SAIDA ************************************************* " );
-			System.out.format("INSTRUCAO: %s", comando[i]);
+			System.out.format("INSTRUCAO: %s", comando);
 			System.out.format("\nDIRECAO  : %s", direcao);
 			System.out.format("\n[X][Y] ->: %s %s" , posicao.getLatitude(), posicao.getLongitude());
 			System.out.println("\nSAIDA ************************************************* " );

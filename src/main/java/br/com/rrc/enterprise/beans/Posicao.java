@@ -1,4 +1,4 @@
-package br.com.rrc.explore.enterprise.beans;
+package br.com.rrc.enterprise.beans;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
