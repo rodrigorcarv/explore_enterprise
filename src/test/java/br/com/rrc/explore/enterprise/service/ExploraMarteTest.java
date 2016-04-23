@@ -1,9 +1,9 @@
-package br.com.rrc.explore.enterprise;
+package br.com.rrc.explore.enterprise.service;
 
 import org.junit.Assert;
 import org.junit.Test;
 
-import br.com.rrc.explore.enterprise.service.MissaoService;
+import br.com.rrc.enterprise.service.MissaoService;
 
 public class ExploraMarteTest {
 	
