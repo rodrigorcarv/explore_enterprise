@@ -1,9 +1,11 @@
 package br.com.rrc.enterprise.service;
 
+import br.com.rrc.explore.enterprise.beans.Posicao;
+
 public class MissaoService {
 
 
-	public String explorar(String[][] mapa, int posicaoEntradaX, int posicaoEntradaY, String direcao, String comandos) {
+	public String explorar(String[][] mapa, Posicao posicao, String direcao, String comandos) {
 
 		char comando[] = comandos.toCharArray();
 
@@ -14,7 +16,7 @@ public class MissaoService {
 			System.out.println("ENTRADA ************************************************* " );
 			System.out.format("INSTRUCAO: %s", comando[i]);
 			System.out.format("\nDIRECAO  : %s", direcao);
-			System.out.format("\n[X][Y] ->: %s %s" , posicaoEntradaX, posicaoEntradaY);
+			System.out.format("\n[X][Y] ->: %s %s" , posicao.getLatitude(), posicao.getLongitude());
 			System.out.println("\nENTRADA ************************************************* " );
 			
 			switch (comando[i]) {
@@ -22,13 +24,13 @@ public class MissaoService {
 			case 'L':
 
 				direcao = rosaDosVetos("L", direcao);
-				mapa [posicaoEntradaX][posicaoEntradaY] = sonda + direcao;
+				mapa [posicao.getLatitude().get()][posicao.getLongitude().get()] = sonda + direcao;
 				break;
 
 			case 'R':
 
 				direcao = rosaDosVetos("R", direcao);
-				mapa [posicaoEntradaX][posicaoEntradaY] = sonda + direcao;
+				mapa [posicao.getLatitude().get()][posicao.getLongitude().get()] = sonda + direcao;
 				break;
 
 			case 'M':
@@ -37,29 +39,30 @@ public class MissaoService {
 				
 				case "N":
 
-					posicaoEntradaY++;
+					
+					posicao.getLongitude().incrementAndGet();
 					break;
 
 				case "E":
 
-					posicaoEntradaX++;
+					posicao.getLatitude().incrementAndGet();
 					break;
 
 				case "S":
 
-					posicaoEntradaY--;
+					posicao.getLongitude().decrementAndGet();
 					break;
 
 				case "W":
 
-					posicaoEntradaX--;
+					posicao.getLatitude().decrementAndGet();
 					break;
 
 				default:
 					break;
 				}
 				
-				mapa [posicaoEntradaX][posicaoEntradaY] = sonda + direcao;
+				mapa [posicao.getLatitude().get()][posicao.getLongitude().get()] = sonda + direcao;
 
 			default:
 				break;
@@ -67,14 +70,14 @@ public class MissaoService {
 			System.out.println("SAIDA ************************************************* " );
 			System.out.format("INSTRUCAO: %s", comando[i]);
 			System.out.format("\nDIRECAO  : %s", direcao);
-			System.out.format("\n[X][Y] ->: %s %s" , posicaoEntradaX, posicaoEntradaY);
+			System.out.format("\n[X][Y] ->: %s %s" , posicao.getLatitude(), posicao.getLongitude());
 			System.out.println("\nSAIDA ************************************************* " );
 			
 			imprimirMapa(mapa);
 		}
 		
-		System.out.format("[X][Y] ->: %s %s - Direcao ->: %s", posicaoEntradaX, posicaoEntradaY, direcao );
-		return String.format("%s %s %s", posicaoEntradaX, posicaoEntradaY, direcao);
+		System.out.format("[X][Y] ->: %s %s - Direcao ->: %s", posicao.getLatitude(), posicao.getLongitude(), direcao );
+		return String.format("%s %s %s", posicao.getLatitude(), posicao.getLongitude(), direcao);
 	
 	}
 	
