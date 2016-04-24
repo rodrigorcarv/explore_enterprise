@@ -10,7 +10,7 @@ import org.junit.Test;
 import br.com.rrc.enterprise.beans.Comando;
 import br.com.rrc.enterprise.beans.Coordenada;
 import br.com.rrc.enterprise.beans.Direcao;
-import br.com.rrc.enterprise.beans.Posicao;
+import br.com.rrc.enterprise.beans.Mapa;
 import br.com.rrc.enterprise.beans.Sonda;
 import br.com.rrc.enterprise.service.MissaoService;
 
@@ -19,11 +19,10 @@ public class TestMissaoMarte {
 	@Test
 	public void testExploraMarte () {
 		
-		String [][] mapa = new String[6][6];
+		Mapa mapa = new Mapa(6, 6);
 		
 		Coordenada coordenada = new Coordenada(new AtomicInteger(1), new AtomicInteger(2));
-		Posicao posicao = new Posicao(coordenada, Direcao.NORTE);
-		Sonda sonda = new Sonda("Maven", posicao);
+		Sonda sonda = new Sonda("Maven", coordenada, Direcao.NORTE);
 		
 		List<Comando> comandos = new ArrayList<Comando>();
 		
@@ -43,4 +42,7 @@ public class TestMissaoMarte {
 		
 		Assert.assertEquals("1 3 NORTE", resultaMissao);
 	}
+	
+	
+
 }

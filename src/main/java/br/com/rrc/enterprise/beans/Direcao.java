@@ -79,7 +79,7 @@ public enum Direcao {
 		OESTE.navegar(Direcao.NORTE, Direcao.SUL);
 	}
 	
-	private static final String MENSAGEM_COORDENADA_NAO_ENCONTRADA = "A direção %s informada não foi encontrada";
+	private static final String MSG_ERR0_DIRECAO_NAO_ENCONTRADA = "A direção %s informada não foi encontrada";
 
 	private String descricao;
 	private Direcao direita;
@@ -105,7 +105,7 @@ public enum Direcao {
 				return bussula;
 			}
 		}
-		throw new IllegalArgumentException(String.format(MENSAGEM_COORDENADA_NAO_ENCONTRADA, coordenada));
+		throw new IllegalArgumentException(String.format(MSG_ERR0_DIRECAO_NAO_ENCONTRADA, coordenada));
 	}
 
 	public String getDescricao() {
@@ -113,10 +113,20 @@ public enum Direcao {
 	}
 	
 	public Direcao virarEsqueda(Direcao direcao) {
+		
+		if (direcao == null ) {
+			throw new IllegalArgumentException(String.format(MSG_ERR0_DIRECAO_NAO_ENCONTRADA, direcao));
+		}
+		
 		return direcao.esquerda;
 	}
 	
 	public Direcao virarDireita(Direcao direcao) {
+		
+		if (direcao == null ) {
+			throw new IllegalArgumentException(String.format(MSG_ERR0_DIRECAO_NAO_ENCONTRADA, direcao));
+		}
+		
 		return direcao.direita;
 	}
 	

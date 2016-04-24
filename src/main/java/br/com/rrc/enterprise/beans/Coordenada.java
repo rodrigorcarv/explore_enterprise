@@ -40,7 +40,4 @@ public class Coordenada {
 	public String toString() {
 		return String.format("Coordenada [latitude=%s, longitude=%s]", latitude, longitude);
 	}
-
-	
-	
 }
