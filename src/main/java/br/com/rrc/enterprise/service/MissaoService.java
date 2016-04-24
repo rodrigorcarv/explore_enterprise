@@ -8,11 +8,11 @@ import br.com.rrc.enterprise.beans.Coordenada;
 import br.com.rrc.enterprise.beans.Direcao;
 import br.com.rrc.enterprise.beans.Posicao;
 import br.com.rrc.enterprise.beans.Sonda;
+import br.com.rrc.enterprise.beans.VirarDireita;
+import br.com.rrc.enterprise.beans.VirarEsquerda;
 
 public class MissaoService {
 
-	private NavegadoService navegadoService = new NavegadoService();
-	
 	public String explorar(String[][] mapa, Sonda sonda, List<Comando> comandos) {
 	
 		Posicao posicao = sonda.getPosicao();
@@ -31,19 +31,23 @@ public class MissaoService {
 
 			case ESQUERDA:
 
-				direcao = navegadoService.navega(Comando.ESQUERDA, direcao);
-				mapa [coordenada.getLatitude().get()][coordenada.getLongitude().get()] = sonda.getNome() + direcao;
+				VirarEsquerda virarEsquerda = new VirarEsquerda();
+				virarEsquerda.executarComando(sonda);
+				
+				mapa [coordenada.getLatitude().get()][coordenada.getLongitude().get()] = sonda.getNome() + sonda.getPosicao();
 				break;
 
 			case DIREITA:
 
-				direcao = navegadoService.navega(Comando.DIREITA, direcao);
-				mapa [coordenada.getLatitude().get()][coordenada.getLongitude().get()] = sonda.getNome() + direcao;
+				VirarDireita virarDireita = new VirarDireita();
+				virarDireita.executarComando(sonda);
+				
+				mapa [coordenada.getLatitude().get()][coordenada.getLongitude().get()] = sonda.getNome() + sonda.getPosicao();
 				break;
 
 			case MOVER:
 
-				switch (direcao) {
+				switch (sonda.getPosicao().getDirecao()) {
 				
 				case NORTE:
 					
@@ -87,9 +91,6 @@ public class MissaoService {
 		return String.format("%s %s %s", coordenada.getLatitude(), coordenada.getLongitude(), direcao);
 	
 	}
-	
-	
-
 
 	private void imprimirMapa(String[][] mapa) {
 

@@ -38,4 +38,16 @@ public class Posicao {
 		this.direcao = direcao;
 	}
 	
+	public void virarEsquerda() {
+		direcao = direcao.virarEsqueda(direcao);
+	}
+	
+	public void virarDireita() {
+		direcao = direcao.virarDireita(direcao);
+	}
+
+	@Override
+	public String toString() {
+		return String.format("Posicao [coordenada=%s, direcao=%s]", coordenada, direcao);
+	}
 }

@@ -36,4 +36,11 @@ public class Coordenada {
 		this.longitude = longitude;
 	}
 
+	@Override
+	public String toString() {
+		return String.format("Coordenada [latitude=%s, longitude=%s]", latitude, longitude);
+	}
+
+	
+	
 }

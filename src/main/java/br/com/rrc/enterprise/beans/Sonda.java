@@ -1,6 +1,6 @@
 package br.com.rrc.enterprise.beans;
 
-public class Sonda extends Controle{
+public class Sonda {
 	
 	private String id;
 	private String nome;
@@ -29,6 +29,19 @@ public class Sonda extends Controle{
 	}
 	public void setPosicao(Posicao posicao) {
 		this.posicao = posicao;
+	}
+
+	public void virarEsquerda() {
+		posicao.virarEsquerda();
+	}
+	
+	public void virarDireita() {
+		posicao.virarDireita();
+	}
+
+	@Override
+	public String toString() {
+		return String.format("Sonda [id=%s, nome=%s, posicao=%s]", id, nome, posicao);
 	}
 
 }

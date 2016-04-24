@@ -1,18 +1,6 @@
 package br.com.rrc.enterprise.beans;
 
-public abstract class Controle {
+public interface Controle {
 	
-	void virarEsquerda(Sonda sonda) {
-		
-		
-	}
-	
-	void virarDireita(Sonda sonda) {
-		
-	}
-	
-	void mover(Sonda sonda) {
-		
-	}
-
+	void executarComando(Sonda sonda);
 }

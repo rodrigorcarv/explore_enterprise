@@ -26,9 +26,18 @@ public enum Direcao {
 	private static final String MENSAGEM_COORDENADA_NAO_ENCONTRADA = "A direção %s informada não foi encontrada";
 
 	private String descricao;
+	private Direcao direita;
+	private Direcao esquerda;
 	
 	Direcao (String descricao) {
 		this.descricao = descricao;
+	}
+	
+	static {
+		NORTE.navegar(Direcao.LESTE, Direcao.OESTE);
+		SUL.navegar(Direcao.OESTE, Direcao.LESTE);
+		LESTE.navegar(Direcao.SUL, Direcao.NORTE);
+		OESTE.navegar(Direcao.NORTE, Direcao.SUL);
 	}
 	
 	/**
@@ -52,5 +61,18 @@ public enum Direcao {
 
 	public String getDescricao() {
 		return descricao;
+	}
+	
+	public Direcao virarEsqueda(Direcao direcao) {
+		return direcao.esquerda;
+	}
+	
+	public Direcao virarDireita(Direcao direcao) {
+		return direcao.direita;
+	}
+	
+	private void navegar(Direcao direita, Direcao esquerda) {
+		this.direita = direita;
+		this.esquerda = esquerda;
 	}
 }
