@@ -1,12 +1,11 @@
 package br.com.rrc.enterprise.beans;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 /**
  * Classe {@link Posicao} representa um ponto unico no planeta 
  * a ser explorado.
  * 
- * Sendo assim sempre temos que ter a latitude e logitude preenchido
+ * Sendo assim sempre temos que ter a latitude e logitude preenchido e 
+ * a {@link Direcao} preenchida para um dos pontos cardeais;
  * como indicado no construtor;
  * 
  * @author rodrigo
@@ -14,25 +13,29 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class Posicao {
 
-	private AtomicInteger latitude;
-	private AtomicInteger longitude;
+	private Coordenada coordenada;
+	private Direcao direcao;
 	
-	public Posicao(AtomicInteger latitude, AtomicInteger longitude) {
+	public Posicao(Coordenada coordenada, Direcao direcao) {
 		super();
-		this.latitude = latitude;
-		this.longitude = longitude;
+		this.coordenada = coordenada;
+		this.direcao = direcao;
+	}
+
+	public Coordenada getCoordenada() {
+		return coordenada;
+	}
+
+	public void setCoordenada(Coordenada coordenada) {
+		this.coordenada = coordenada;
+	}
+
+	public Direcao getDirecao() {
+		return direcao;
+	}
+
+	public void setDirecao(Direcao direcao) {
+		this.direcao = direcao;
 	}
 	
-	public AtomicInteger getLatitude() {
-		return latitude;
-	}
-	public void setLatitude(AtomicInteger latitude) {
-		this.latitude = latitude;
-	}
-	public AtomicInteger getLongitude() {
-		return longitude;
-	}
-	public void setLongitude(AtomicInteger longitude) {
-		this.longitude = longitude;
-	}
 }

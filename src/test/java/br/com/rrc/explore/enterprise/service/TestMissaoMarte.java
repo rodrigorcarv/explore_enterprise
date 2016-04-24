@@ -8,8 +8,10 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import br.com.rrc.enterprise.beans.Comando;
+import br.com.rrc.enterprise.beans.Coordenada;
 import br.com.rrc.enterprise.beans.Direcao;
 import br.com.rrc.enterprise.beans.Posicao;
+import br.com.rrc.enterprise.beans.Sonda;
 import br.com.rrc.enterprise.service.MissaoService;
 
 public class TestMissaoMarte {
@@ -19,7 +21,9 @@ public class TestMissaoMarte {
 		
 		String [][] mapa = new String[6][6];
 		
-		Posicao posicao = new Posicao(new AtomicInteger(1), new AtomicInteger(2));
+		Coordenada coordenada = new Coordenada(new AtomicInteger(1), new AtomicInteger(2));
+		Posicao posicao = new Posicao(coordenada, Direcao.NORTE);
+		Sonda sonda = new Sonda("Maven", posicao);
 		
 		List<Comando> comandos = new ArrayList<Comando>();
 		
@@ -35,7 +39,7 @@ public class TestMissaoMarte {
 		
 		
 		MissaoService missaoMarteService = new MissaoService();
-		String resultaMissao = missaoMarteService.explorar(mapa, posicao, Direcao.NORTE, comandos);
+		String resultaMissao = missaoMarteService.explorar(mapa, sonda, comandos);
 		
 		Assert.assertEquals("1 3 N", resultaMissao);
 	}

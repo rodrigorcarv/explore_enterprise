@@ -4,35 +4,41 @@ package br.com.rrc.enterprise.service;
 import java.util.List;
 
 import br.com.rrc.enterprise.beans.Comando;
+import br.com.rrc.enterprise.beans.Coordenada;
 import br.com.rrc.enterprise.beans.Direcao;
 import br.com.rrc.enterprise.beans.Posicao;
+import br.com.rrc.enterprise.beans.Sonda;
 
 public class MissaoService {
 
-	public String explorar(String[][] mapa, Posicao posicao, Direcao direcao, List<Comando> comandos) {
+	private NavegadoService navegadoService = new NavegadoService();
 	
-		String sonda = "SONDA :-> ";
+	public String explorar(String[][] mapa, Sonda sonda, List<Comando> comandos) {
+	
+		Posicao posicao = sonda.getPosicao();
+		Coordenada coordenada = posicao.getCoordenada();
+		Direcao direcao = posicao.getDirecao();
 		
 		for (Comando comando : comandos) {
 		
 			System.out.println("ENTRADA ************************************************* " );
 			System.out.format("INSTRUCAO: %s", comando);
-			System.out.format("\nDIRECAO  : %s", direcao);
-			System.out.format("\n[X][Y] ->: %s %s" , posicao.getLatitude(), posicao.getLongitude());
+			System.out.format("\nDIRECAO  : %s", posicao.getDirecao());
+			System.out.format("\n[X][Y] ->: %s %s" , coordenada.getLatitude(), coordenada.getLongitude());
 			System.out.println("\nENTRADA ************************************************* " );
 			
 			switch (comando) {
 
 			case ESQUERDA:
 
-				direcao = rosaDosVetos(Comando.ESQUERDA, direcao);
-				mapa [posicao.getLatitude().get()][posicao.getLongitude().get()] = sonda + direcao;
+				direcao = navegadoService.navega(Comando.ESQUERDA, direcao);
+				mapa [coordenada.getLatitude().get()][coordenada.getLongitude().get()] = sonda.getNome() + direcao;
 				break;
 
 			case DIREITA:
 
-				direcao = rosaDosVetos(Comando.DIREITA, direcao);
-				mapa [posicao.getLatitude().get()][posicao.getLongitude().get()] = sonda + direcao;
+				direcao = navegadoService.navega(Comando.DIREITA, direcao);
+				mapa [coordenada.getLatitude().get()][coordenada.getLongitude().get()] = sonda.getNome() + direcao;
 				break;
 
 			case MOVER:
@@ -41,29 +47,29 @@ public class MissaoService {
 				
 				case NORTE:
 					
-					posicao.getLongitude().incrementAndGet();
+					coordenada.getLongitude().incrementAndGet();
 					break;
 
 				case LESTE:
 
-					posicao.getLatitude().incrementAndGet();
+					coordenada.getLatitude().incrementAndGet();
 					break;
 
 				case SUL:
 
-					posicao.getLongitude().decrementAndGet();
+					coordenada.getLongitude().decrementAndGet();
 					break;
 
 				case OESTE:
 
-					posicao.getLatitude().decrementAndGet();
+					coordenada.getLatitude().decrementAndGet();
 					break;
 
 				default:
 					break;
 				}
 				
-				mapa [posicao.getLatitude().get()][posicao.getLongitude().get()] = sonda + direcao;
+				mapa [coordenada.getLatitude().get()][coordenada.getLongitude().get()] = sonda.getNome() + direcao;
 
 			default:
 				break;
@@ -71,38 +77,18 @@ public class MissaoService {
 			System.out.println("SAIDA ************************************************* " );
 			System.out.format("INSTRUCAO: %s", comando);
 			System.out.format("\nDIRECAO  : %s", direcao);
-			System.out.format("\n[X][Y] ->: %s %s" , posicao.getLatitude(), posicao.getLongitude());
+			System.out.format("\n[X][Y] ->: %s %s" , coordenada.getLatitude(), coordenada.getLongitude());
 			System.out.println("\nSAIDA ************************************************* " );
 			
 			imprimirMapa(mapa);
 		}
 		
-		System.out.format("[X][Y] ->: %s %s - Direcao ->: %s", posicao.getLatitude(), posicao.getLongitude(), direcao );
-		return String.format("%s %s %s", posicao.getLatitude(), posicao.getLongitude(), direcao);
+		System.out.format("[X][Y] ->: %s %s - Direcao ->: %s", coordenada.getLatitude(), coordenada.getLongitude(), direcao );
+		return String.format("%s %s %s", coordenada.getLatitude(), coordenada.getLongitude(), direcao);
 	
 	}
 	
-	private Direcao rosaDosVetos(Comando comando, Direcao direcao) {
-
-		if (Direcao.NORTE.equals(direcao) &&  Comando.ESQUERDA.equals(comando)) {
-			return Direcao.OESTE;
-		} else if (Direcao.NORTE.equals(direcao) &&  Comando.DIREITA.equals(comando)) {
-			return Direcao.LESTE;
-		} else if (Direcao.LESTE.equals(direcao) &&  Comando.ESQUERDA.equals(comando)) {
-			return Direcao.NORTE;
-		} else if (Direcao.LESTE.equals(direcao) &&  Comando.DIREITA.equals(comando)) {
-			return Direcao.SUL; 
-		} else if (Direcao.SUL.equals(direcao) &&  Comando.ESQUERDA.equals(comando)) {
-			return Direcao.LESTE;
-		} else if (Direcao.SUL.equals(direcao) &&  Comando.DIREITA.equals(comando)) {
-			return Direcao.OESTE;
-		} else if (Direcao.OESTE.equals(direcao) &&  Comando.ESQUERDA.equals(comando)) {
-			return Direcao.SUL;
-		} else if (Direcao.OESTE.equals(direcao) &&  Comando.DIREITA.equals(comando)) {
-			return Direcao.SUL;
-		}
-		return direcao;
-	}
+	
 
 
 	private void imprimirMapa(String[][] mapa) {
