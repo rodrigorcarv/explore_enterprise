@@ -44,4 +44,7 @@ public class Sonda {
 		return String.format("Sonda [id=%s, nome=%s, posicao=%s]", id, nome, posicao);
 	}
 
+	public void mover() {
+		posicao.navegar();
+	}
 }

@@ -45,6 +45,10 @@ public class Posicao {
 	public void virarDireita() {
 		direcao = direcao.virarDireita(direcao);
 	}
+	
+	public void navegar() {
+		direcao.navegar(coordenada);
+	}
 
 	@Override
 	public String toString() {

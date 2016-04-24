@@ -6,6 +6,7 @@ import java.util.List;
 import br.com.rrc.enterprise.beans.Comando;
 import br.com.rrc.enterprise.beans.Coordenada;
 import br.com.rrc.enterprise.beans.Direcao;
+import br.com.rrc.enterprise.beans.Movimentar;
 import br.com.rrc.enterprise.beans.Posicao;
 import br.com.rrc.enterprise.beans.Sonda;
 import br.com.rrc.enterprise.beans.VirarDireita;
@@ -47,31 +48,8 @@ public class MissaoService {
 
 			case MOVER:
 
-				switch (sonda.getPosicao().getDirecao()) {
-				
-				case NORTE:
-					
-					coordenada.getLongitude().incrementAndGet();
-					break;
-
-				case LESTE:
-
-					coordenada.getLatitude().incrementAndGet();
-					break;
-
-				case SUL:
-
-					coordenada.getLongitude().decrementAndGet();
-					break;
-
-				case OESTE:
-
-					coordenada.getLatitude().decrementAndGet();
-					break;
-
-				default:
-					break;
-				}
+				Movimentar movimentar = new Movimentar();
+				movimentar.moverSonda(sonda);
 				
 				mapa [coordenada.getLatitude().get()][coordenada.getLongitude().get()] = sonda.getNome() + direcao;
 

@@ -18,11 +18,67 @@ package br.com.rrc.enterprise.beans;
  */
 public enum Direcao {
 	
-	NORTE("N"),
-	SUL("S"),
-	LESTE("L"),
-	OESTE("O");
+	NORTE("N") {
+		
+		@Override
+		public void navegar(Coordenada coordenada) {
+			coordenada.getLongitude().incrementAndGet();
+		}
 
+	},
+	SUL("S") {
+		@Override
+		public void navegar(Coordenada coordenada) {
+			coordenada.getLongitude().decrementAndGet();
+		}
+	},
+	LESTE("L") {
+		@Override
+		public void navegar(Coordenada coordenada) {
+			coordenada.getLatitude().incrementAndGet();
+			
+		}
+	},
+	OESTE("O") {
+		@Override
+		public void navegar(Coordenada coordenada) {
+			coordenada.getLatitude().decrementAndGet();
+		}
+	};
+
+	/**
+	 * Responsavel por realizar a navegacao da sonda
+	 * de acordo com as seguintes regras:
+	 * 
+	 *  Esquerda vira 90 graus;
+	 *  Direita vira 90 graus;
+	 *  
+	 *  Aplicando esta regras a rosas dos ventos {@link Direcao}
+	 *  
+	 *  Sonda apontando para o NORTE 
+	 *  	vira 90 graus a esquerda obter direcao OESTE
+	 *      vira 90 graus a direita obter direcao LESTE
+	 *  
+	 *  Sonda apontando para o LESTE 
+	 *  	vira 90 graus a esquerda obter direcao NORTE
+	 *      vira 90 graus a direita obter direcao SUL
+	 * 
+	 *  Sonda apontando para o SUL 
+	 *  	vira 90 graus a esquerda obter direcao LESTE
+	 *      vira 90 graus a direita obter direcao OESTE
+	 *
+	 *  Sonda apontando para o OESTE 
+	 *  	vira 90 graus a esquerda obter direcao SUL
+	 *      vira 90 graus a direita obter direcao NORTE
+	 *   
+	 **/  
+	static {
+		NORTE.navegar(Direcao.LESTE, Direcao.OESTE);
+		SUL.navegar(Direcao.OESTE, Direcao.LESTE);
+		LESTE.navegar(Direcao.SUL, Direcao.NORTE);
+		OESTE.navegar(Direcao.NORTE, Direcao.SUL);
+	}
+	
 	private static final String MENSAGEM_COORDENADA_NAO_ENCONTRADA = "A direção %s informada não foi encontrada";
 
 	private String descricao;
@@ -31,13 +87,6 @@ public enum Direcao {
 	
 	Direcao (String descricao) {
 		this.descricao = descricao;
-	}
-	
-	static {
-		NORTE.navegar(Direcao.LESTE, Direcao.OESTE);
-		SUL.navegar(Direcao.OESTE, Direcao.LESTE);
-		LESTE.navegar(Direcao.SUL, Direcao.NORTE);
-		OESTE.navegar(Direcao.NORTE, Direcao.SUL);
 	}
 	
 	/**
@@ -75,4 +124,6 @@ public enum Direcao {
 		this.direita = direita;
 		this.esquerda = esquerda;
 	}
+
+	public abstract void navegar(Coordenada coordenada);
 }

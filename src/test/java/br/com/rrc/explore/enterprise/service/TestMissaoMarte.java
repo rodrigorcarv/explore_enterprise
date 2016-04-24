@@ -41,6 +41,6 @@ public class TestMissaoMarte {
 		MissaoService missaoMarteService = new MissaoService();
 		String resultaMissao = missaoMarteService.explorar(mapa, sonda, comandos);
 		
-		Assert.assertEquals("1 3 N", resultaMissao);
+		Assert.assertEquals("1 3 NORTE", resultaMissao);
 	}
 }
