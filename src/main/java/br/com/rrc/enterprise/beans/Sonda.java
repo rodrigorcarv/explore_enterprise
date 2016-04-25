@@ -2,7 +2,8 @@ package br.com.rrc.enterprise.beans;
 
 public class Sonda {
 	
-	private static final String MSG_ERR0_DIRECAO_NAO_ENCONTRADA = "A direção %s informada não foi encontrada";
+	private static final String MSG_ERR0_COMANDO_INFORMADO_RESULTARAM_EM_UMA_COORDENADA_INVALDIA = "Os comando informados levam a sonda para um coordena invalida";
+	private static final String MSG_ERR0_DIRECAO_INFORMA_E_INVALIDA = "A direção %s informada \u00E9 invalida";
 	
 	private String id;
 	private String nome;
@@ -48,7 +49,7 @@ public class Sonda {
 	public void virarEsquerda() {
 		
 		if (direcao == null) {
-			throw new IllegalArgumentException(String.format(MSG_ERR0_DIRECAO_NAO_ENCONTRADA, direcao));
+			throw new IllegalArgumentException(String.format(MSG_ERR0_DIRECAO_INFORMA_E_INVALIDA, direcao));
 		}
 
 		direcao = direcao.virarEsqueda(direcao);
@@ -57,15 +58,19 @@ public class Sonda {
 	public void virarDireita() {
 		
 		if (direcao == null) {
-			throw new IllegalArgumentException(String.format(MSG_ERR0_DIRECAO_NAO_ENCONTRADA, direcao));
+			throw new IllegalArgumentException(String.format(MSG_ERR0_DIRECAO_INFORMA_E_INVALIDA, direcao));
 		}
 		direcao = direcao.virarDireita(direcao);
 	}
 
-	public void mover() {
+	public void mover(Dimensao dimensao) {
 		
 		if (direcao == null) {
-			throw new IllegalArgumentException(String.format(MSG_ERR0_DIRECAO_NAO_ENCONTRADA, direcao));
+			throw new IllegalArgumentException(String.format(MSG_ERR0_DIRECAO_INFORMA_E_INVALIDA, direcao));
+		}
+		
+		if (direcao.isCoordenadaValida(coordenada, dimensao)) {
+			throw new IllegalArgumentException(String.format(MSG_ERR0_COMANDO_INFORMADO_RESULTARAM_EM_UMA_COORDENADA_INVALDIA, coordenada));
 		}
 		
 		direcao.navegar(coordenada);

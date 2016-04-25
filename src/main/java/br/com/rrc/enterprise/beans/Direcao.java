@@ -25,24 +25,38 @@ public enum Direcao {
 			coordenada.getLongitude().incrementAndGet();
 		}
 
+		public boolean isCoordenadaValida(Coordenada coordenada, Dimensao dimensao) {
+			return coordenada.getLongitude().get() +1 > dimensao.getComprimento();
+		}
 	},
 	SUL("S") {
 		@Override
 		public void navegar(Coordenada coordenada) {
 			coordenada.getLongitude().decrementAndGet();
 		}
+		
+		public boolean isCoordenadaValida(Coordenada coordenada, Dimensao dimensao) {
+			return coordenada.getLongitude().get() -1 < 0;
+		}
 	},
 	LESTE("L") {
 		@Override
 		public void navegar(Coordenada coordenada) {
 			coordenada.getLatitude().incrementAndGet();
-			
+		}
+		
+		public boolean isCoordenadaValida(Coordenada coordenada, Dimensao dimensao) {
+			return coordenada.getLatitude().get() +1 > dimensao.getLargura();
 		}
 	},
 	OESTE("O") {
 		@Override
 		public void navegar(Coordenada coordenada) {
 			coordenada.getLatitude().decrementAndGet();
+		}
+		
+		public boolean isCoordenadaValida(Coordenada coordenada, Dimensao dimensao) {
+			return coordenada.getLatitude().get() -1 < 0;
 		}
 	};
 
@@ -136,4 +150,6 @@ public enum Direcao {
 	}
 
 	public abstract void navegar(Coordenada coordenada);
+	 
+	public abstract boolean isCoordenadaValida(Coordenada coordenada, Dimensao dimensao);
 }

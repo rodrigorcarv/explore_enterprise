@@ -1,11 +1,11 @@
 package br.com.rrc.enterprise.beans;
 
-public class Mapa {
-
+public class Dimensao {
+	
 	private int comprimento;
 	private int largura;
 	
-	public Mapa(int comprimento, int largura) {
+	public Dimensao(int comprimento, int largura) {
 		super();
 		this.comprimento = comprimento;
 		this.largura = largura;
@@ -23,4 +23,5 @@ public class Mapa {
 	public void setLargura(int largura) {
 		this.largura = largura;
 	}
+
 }

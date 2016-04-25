@@ -37,6 +37,38 @@ public class Coordenada {
 	}
 
 	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((latitude == null) ? 0 : latitude.hashCode());
+		result = prime * result + ((longitude == null) ? 0 : longitude.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Coordenada other = (Coordenada) obj;
+		if (latitude == null) {
+			if (other.latitude != null)
+				return false;
+		} else if (!(latitude.intValue() == other.latitude.intValue()))
+			return false;
+		if (longitude == null) {
+			if (other.longitude != null)
+				return false;
+		} else if (!(longitude.intValue() == other.longitude.intValue()))
+			return false;
+		return true;
+	}
+	
+
+	@Override
 	public String toString() {
 		return String.format("Coordenada [latitude=%s, longitude=%s]", latitude, longitude);
 	}

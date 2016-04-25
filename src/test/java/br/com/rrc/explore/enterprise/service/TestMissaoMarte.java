@@ -9,17 +9,17 @@ import org.junit.Test;
 
 import br.com.rrc.enterprise.beans.Comando;
 import br.com.rrc.enterprise.beans.Coordenada;
+import br.com.rrc.enterprise.beans.Dimensao;
 import br.com.rrc.enterprise.beans.Direcao;
-import br.com.rrc.enterprise.beans.Mapa;
 import br.com.rrc.enterprise.beans.Sonda;
 import br.com.rrc.enterprise.service.MissaoService;
 
 public class TestMissaoMarte {
 	
 	@Test
-	public void testExploraMarte () {
+	public void testExploraMarteCoordenadaLatitudeUmLongitudeTresDirecaoNorte () {
 		
-		Mapa mapa = new Mapa(6, 6);
+		Dimensao dimensao = new Dimensao(5, 5);
 		
 		Coordenada coordenada = new Coordenada(new AtomicInteger(1), new AtomicInteger(2));
 		Sonda sonda = new Sonda("Maven", coordenada, Direcao.NORTE);
@@ -36,11 +36,37 @@ public class TestMissaoMarte {
 		comandos.add(Comando.MOVER);
 		comandos.add(Comando.MOVER);
 		
-		
 		MissaoService missaoMarteService = new MissaoService();
-		String resultaMissao = missaoMarteService.explorar(mapa, sonda, comandos);
+		String resultaMissao = missaoMarteService.explorar(dimensao, sonda, comandos);
 		
 		Assert.assertEquals("1 3 NORTE", resultaMissao);
+	}
+	
+	@Test
+	public void testExploraMarteCoordenadaLatitudeTresLongitudeTresDirecaoLeste () {
+		
+		Dimensao dimensao = new Dimensao(5, 5);
+		
+		Coordenada coordenada = new Coordenada(new AtomicInteger(3), new AtomicInteger(3));
+		Sonda sonda = new Sonda("Maven", coordenada, Direcao.LESTE);
+		
+		List<Comando> comandos = new ArrayList<Comando>();
+		
+		comandos.add(Comando.MOVER);
+		comandos.add(Comando.MOVER);
+		comandos.add(Comando.DIREITA);
+		comandos.add(Comando.MOVER);
+		comandos.add(Comando.MOVER);
+		comandos.add(Comando.DIREITA);
+		comandos.add(Comando.MOVER);
+		comandos.add(Comando.DIREITA);
+		comandos.add(Comando.DIREITA);
+		comandos.add(Comando.MOVER);
+		
+		MissaoService missaoMarteService = new MissaoService();
+		String resultaMissao = missaoMarteService.explorar(dimensao, sonda, comandos);
+		
+		Assert.assertEquals("5 1 LESTE", resultaMissao);
 	}
 	
 	
