@@ -39,7 +39,7 @@ public enum Direcao {
 			return coordenada.getLongitude().get() -1 < 0;
 		}
 	},
-	LESTE("L") {
+	LESTE("E") {
 		@Override
 		public void navegar(Coordenada coordenada) {
 			coordenada.getLatitude().incrementAndGet();
@@ -49,7 +49,7 @@ public enum Direcao {
 			return coordenada.getLatitude().get() +1 > dimensao.getLargura();
 		}
 	},
-	OESTE("O") {
+	OESTE("W") {
 		@Override
 		public void navegar(Coordenada coordenada) {
 			coordenada.getLatitude().decrementAndGet();

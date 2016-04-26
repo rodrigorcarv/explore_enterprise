@@ -17,6 +17,12 @@ public class Sonda {
 		this.direcao = direcao;
 	}
 	
+	public Sonda(Coordenada coordenada, Direcao direcao) {
+		super();
+		this.coordenada = coordenada;
+		this.direcao = direcao;
+	}
+	
 	public String getId() {
 		return id;
 	}
@@ -74,6 +80,35 @@ public class Sonda {
 		}
 		
 		direcao.navegar(coordenada);
+	}
+
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((coordenada == null) ? 0 : coordenada.hashCode());
+		result = prime * result + ((direcao == null) ? 0 : direcao.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Sonda other = (Sonda) obj;
+		if (coordenada == null) {
+			if (other.coordenada != null)
+				return false;
+		} else if (!coordenada.equals(other.coordenada))
+			return false;
+		if (direcao != other.direcao)
+			return false;
+		return true;
 	}
 
 	@Override
