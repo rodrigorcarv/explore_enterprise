@@ -11,7 +11,9 @@ import br.com.rrc.enterprise.beans.Comando;
 import br.com.rrc.enterprise.beans.Coordenada;
 import br.com.rrc.enterprise.beans.Dimensao;
 import br.com.rrc.enterprise.beans.Direcao;
+import br.com.rrc.enterprise.beans.Explorador;
 import br.com.rrc.enterprise.beans.Sonda;
+import br.com.rrc.enterprise.dto.RelatorioExploracaoDTO;
 import br.com.rrc.enterprise.service.impl.MissaoServiceImpl;
 
 public class TestMissaoMarte {
@@ -37,7 +39,14 @@ public class TestMissaoMarte {
 		comandos.add(Comando.MOVER);
 		
 		MissaoServiceImpl missaoMarteService = new MissaoServiceImpl();
-		String resultaMissao = missaoMarteService.explorar(dimensao, sonda, comandos);
+		Explorador explorador = new Explorador(sonda, comandos);
+		
+		RelatorioExploracaoDTO explorarDTO = missaoMarteService.explorar(dimensao, explorador);
+		
+		Coordenada coordenadaSonda = explorarDTO.getSonda().getCoordenada();
+		Direcao direcao = explorarDTO.getSonda().getDirecao();
+		
+		String resultaMissao = String.format("%s %s %s", coordenadaSonda.getLatitude(), coordenadaSonda.getLongitude(), direcao);
 		
 		Assert.assertEquals("1 3 NORTE", resultaMissao);
 	}
@@ -64,7 +73,13 @@ public class TestMissaoMarte {
 		comandos.add(Comando.MOVER);
 		
 		MissaoServiceImpl missaoMarteService = new MissaoServiceImpl();
-		String resultaMissao = missaoMarteService.explorar(dimensao, sonda, comandos);
+		Explorador explorador = new Explorador(sonda, comandos);
+		RelatorioExploracaoDTO explorarDTO = missaoMarteService.explorar(dimensao, explorador);
+		
+		Coordenada coordenadaSonda = explorarDTO.getSonda().getCoordenada();
+		Direcao direcao = explorarDTO.getSonda().getDirecao();
+		
+		String resultaMissao = String.format("%s %s %s", coordenadaSonda.getLatitude(), coordenadaSonda.getLongitude(), direcao);
 		
 		Assert.assertEquals("5 1 LESTE", resultaMissao);
 	}

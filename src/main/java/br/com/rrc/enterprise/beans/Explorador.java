@@ -7,6 +7,12 @@ public class Explorador {
 	private Sonda sonda;
 	private List<Comando> comandos;
 	
+	public Explorador(Sonda sonda, List<Comando> comandos) {
+		super();
+		this.sonda = sonda;
+		this.comandos = comandos;
+	}
+	
 	public Sonda getSonda() {
 		return sonda;
 	}

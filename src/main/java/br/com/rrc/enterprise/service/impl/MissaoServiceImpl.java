@@ -9,22 +9,25 @@ import br.com.rrc.enterprise.beans.Comando;
 import br.com.rrc.enterprise.beans.Coordenada;
 import br.com.rrc.enterprise.beans.Dimensao;
 import br.com.rrc.enterprise.beans.Direcao;
+import br.com.rrc.enterprise.beans.Explorador;
+import br.com.rrc.enterprise.beans.Mapa;
 import br.com.rrc.enterprise.beans.Movimentar;
 import br.com.rrc.enterprise.beans.Sonda;
 import br.com.rrc.enterprise.beans.VirarDireita;
 import br.com.rrc.enterprise.beans.VirarEsquerda;
+import br.com.rrc.enterprise.dto.PosicaoDTO;
+import br.com.rrc.enterprise.dto.RelatorioExploracaoDTO;
+import br.com.rrc.enterprise.service.MissaoService;
 
 @Service
-public class MissaoServiceImpl {
+public class MissaoServiceImpl implements MissaoService {
 
-	public String explorar(Dimensao dimensao, Sonda sonda, List<Comando> comandos) {
+	public RelatorioExploracaoDTO explorar(Dimensao dimensao, Explorador explorador) {
 
-		List<Coordenada> coordenadas = new ArrayList<>();
-		
-		Coordenada coordenada = sonda.getCoordenada();
-		Direcao direcao = sonda.getDirecao();
+		Sonda sonda = explorador.getSonda();
+		List<PosicaoDTO> posicaoDTOs = new ArrayList<>();
 
-		for (Comando comando : comandos) {
+		for (Comando comando : explorador.getComandos()) {
 
 			switch (comando) {
 
@@ -44,10 +47,31 @@ public class MissaoServiceImpl {
 
 				Movimentar movimentar = new Movimentar();
 				movimentar.moverSonda(sonda, dimensao);
-				coordenadas.add(coordenada);
 				break;
 			}
+			
+			PosicaoDTO  posicaoDTO = new PosicaoDTO(sonda.getCoordenada(), sonda.getDirecao());
+			posicaoDTOs.add(posicaoDTO);
 		}
-		return String.format("%s %s %s", coordenada.getLatitude(), coordenada.getLongitude(), direcao);
+		
+		RelatorioExploracaoDTO relatorioExploracaoDTO = new RelatorioExploracaoDTO();
+		relatorioExploracaoDTO.setPosicaoDTOs(posicaoDTOs );
+		relatorioExploracaoDTO.setSonda(sonda);
+		
+		return relatorioExploracaoDTO;
+	}
+
+	@Override
+	public List<RelatorioExploracaoDTO> explorar(Mapa mapa) {
+		
+		List<RelatorioExploracaoDTO> relExploracaoDTOs = new ArrayList<>();
+		
+		for (Explorador explorador : mapa.getExploradores()) {
+			
+			RelatorioExploracaoDTO relExploracaoDTO = explorar(mapa.getDimensao(), explorador);
+			relExploracaoDTOs.add(relExploracaoDTO);
+		}
+		
+		return relExploracaoDTOs;
 	}
 }

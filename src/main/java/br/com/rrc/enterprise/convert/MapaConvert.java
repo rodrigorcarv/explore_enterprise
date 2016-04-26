@@ -8,6 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.joda.convert.StringConvert;
+import org.springframework.stereotype.Component;
 
 import br.com.rrc.enterprise.beans.Comando;
 import br.com.rrc.enterprise.beans.Coordenada;
@@ -24,6 +25,7 @@ import br.com.rrc.enterprise.beans.Sonda;
  * @author rodrigo
  *
  */
+@Component
 public class MapaConvert {
 
 	private static final String LINE = "\r\n";
@@ -66,15 +68,13 @@ public class MapaConvert {
 
 		while (linesTokenizer.hasMoreTokens()) {
 
-			Explorador explorador = new Explorador();
-
 			Matcher matcherCoordenadas = getMatcher(patternCoordenada, linesTokenizer.nextToken());
 			Sonda sonda = string2Sonda(matcherCoordenadas.group(1), matcherCoordenadas.group(2), matcherCoordenadas.group(3));
-			explorador.setSonda(sonda);
 			
 			Matcher matcherComandos = getMatcher(patternComando, linesTokenizer.nextToken());
 			List<Comando> comandos = string2Comando(matcherComandos.group(1));
-			explorador.setComandos(comandos);
+			
+			Explorador explorador = new Explorador(sonda, comandos);
 			exploradores.add(explorador);
 		}
 

@@ -1,4 +1,4 @@
-package br.com.rrc.explore.enterprise.utils;
+package br.com.rrc.explore.enterprise.convert;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -132,11 +132,7 @@ public class TestConvert {
 		comandos.add(Comando.MOVER);
 		comandos.add(Comando.MOVER);
 		
-		Explorador explorador = new Explorador();
-		explorador.setComandos(comandos);
-		explorador.setSonda(sonda);
-		
-		return explorador;
+		return new Explorador(sonda, comandos);
 		
 	}
 	
@@ -160,11 +156,6 @@ public class TestConvert {
 		comandos.add(Comando.DIREITA);
 		comandos.add(Comando.MOVER);
 		
-		Explorador explorador = new Explorador();
-		explorador.setComandos(comandos);
-		explorador.setSonda(sonda);
-		
-		return explorador;
-		
+		return new Explorador(sonda, comandos);
 	}
 }
