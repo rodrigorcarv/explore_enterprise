@@ -2,6 +2,8 @@ package br.com.rrc.enterprise.beans;
 
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlAccessorOrder;
+
 public class Mapa {
 	
 	private Dimensao dimensao;

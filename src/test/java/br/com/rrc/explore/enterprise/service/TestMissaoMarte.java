@@ -2,10 +2,13 @@ package br.com.rrc.explore.enterprise.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 
 import br.com.rrc.enterprise.beans.Comando;
 import br.com.rrc.enterprise.beans.Coordenada;
@@ -15,7 +18,11 @@ import br.com.rrc.enterprise.beans.Explorador;
 import br.com.rrc.enterprise.beans.Sonda;
 import br.com.rrc.enterprise.dto.RelatorioExploracaoDTO;
 import br.com.rrc.enterprise.service.impl.MissaoServiceImpl;
+import br.com.rrc.explore.enterprise.ExploreEnterpriseApplication;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@SpringApplicationConfiguration(classes = ExploreEnterpriseApplication.class)
+@WebAppConfiguration
 public class TestMissaoMarte {
 	
 	@Test
@@ -23,7 +30,7 @@ public class TestMissaoMarte {
 		
 		Dimensao dimensao = new Dimensao(5, 5);
 		
-		Coordenada coordenada = new Coordenada(new AtomicInteger(1), new AtomicInteger(2));
+		Coordenada coordenada = new Coordenada(1, 2);
 		Sonda sonda = new Sonda("Maven", coordenada, Direcao.NORTE);
 		
 		List<Comando> comandos = new ArrayList<Comando>();
@@ -56,7 +63,7 @@ public class TestMissaoMarte {
 		
 		Dimensao dimensao = new Dimensao(5, 5);
 		
-		Coordenada coordenada = new Coordenada(new AtomicInteger(3), new AtomicInteger(3));
+		Coordenada coordenada = new Coordenada(3, 3);
 		Sonda sonda = new Sonda("Maven", coordenada, Direcao.LESTE);
 		
 		List<Comando> comandos = new ArrayList<Comando>();

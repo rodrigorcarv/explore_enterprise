@@ -26,7 +26,7 @@ public class TestDirecao {
 	@Test
 	public void testBuscaCoordenadaLeste() {
 		
-		String direcao = "L";
+		String direcao = "E";
 		Direcao direcaoEnum = Direcao.buscaCoordenada(direcao);
 		Assert.assertEquals(Direcao.LESTE, direcaoEnum);
 	}
@@ -34,7 +34,7 @@ public class TestDirecao {
 	@Test
 	public void testBuscaCoordenadaOeste() {
 		
-		String direcao = "O";
+		String direcao = "W";
 		Direcao direcaoEnum = Direcao.buscaCoordenada(direcao);
 		Assert.assertEquals(Direcao.OESTE, direcaoEnum);
 	}

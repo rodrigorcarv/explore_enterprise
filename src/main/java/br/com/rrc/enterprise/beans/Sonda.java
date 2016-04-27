@@ -10,6 +10,8 @@ public class Sonda {
 	private Coordenada coordenada;
 	private Direcao direcao;
 	
+	public Sonda() {}
+	
 	public Sonda(String nome, Coordenada coordenada, Direcao direcao) {
 		super();
 		this.nome = nome;

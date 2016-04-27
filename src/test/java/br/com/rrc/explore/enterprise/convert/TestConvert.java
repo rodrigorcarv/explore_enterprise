@@ -2,7 +2,6 @@ package br.com.rrc.explore.enterprise.convert;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -115,9 +114,7 @@ public class TestConvert {
 	
 	private Explorador exploradoraPhoenix() {
 
-		AtomicInteger latitude = new AtomicInteger(1);
-		AtomicInteger longitude = new AtomicInteger(2);;
-		Coordenada coordenada = new Coordenada(latitude, longitude);
+		Coordenada coordenada = new Coordenada(1, 2);
 		Sonda sonda = new Sonda(coordenada , Direcao.NORTE);
 
 		List<Comando> comandos = new ArrayList<Comando>();
@@ -138,9 +135,7 @@ public class TestConvert {
 	
 	private Explorador exploradoraObiter() {
 		
-		AtomicInteger latitude = new AtomicInteger(3);
-		AtomicInteger longitude = new AtomicInteger(3);;
-		Coordenada coordenada = new Coordenada(latitude, longitude);
+		Coordenada coordenada = new Coordenada(3, 3);
 		Sonda sonda = new Sonda(coordenada , Direcao.LESTE);
 
 		List<Comando> comandos = new ArrayList<Comando>();

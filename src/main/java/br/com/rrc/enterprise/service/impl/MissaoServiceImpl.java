@@ -3,12 +3,11 @@ package br.com.rrc.enterprise.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jvnet.hk2.annotations.Service;
+import org.springframework.stereotype.Service;
 
 import br.com.rrc.enterprise.beans.Comando;
 import br.com.rrc.enterprise.beans.Coordenada;
 import br.com.rrc.enterprise.beans.Dimensao;
-import br.com.rrc.enterprise.beans.Direcao;
 import br.com.rrc.enterprise.beans.Explorador;
 import br.com.rrc.enterprise.beans.Mapa;
 import br.com.rrc.enterprise.beans.Movimentar;
@@ -50,12 +49,19 @@ public class MissaoServiceImpl implements MissaoService {
 				break;
 			}
 			
-			PosicaoDTO  posicaoDTO = new PosicaoDTO(sonda.getCoordenada(), sonda.getDirecao());
-			posicaoDTOs.add(posicaoDTO);
+			Coordenada coordenada = sonda.getCoordenada();
+			
+			PosicaoDTO posicaoDTO;
+			try {
+				posicaoDTO = new PosicaoDTO(coordenada.clone(), sonda.getDirecao());
+				posicaoDTOs.add(posicaoDTO);
+			} catch (CloneNotSupportedException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		RelatorioExploracaoDTO relatorioExploracaoDTO = new RelatorioExploracaoDTO();
-		relatorioExploracaoDTO.setPosicaoDTOs(posicaoDTOs );
+		relatorioExploracaoDTO.setPosicaoDTOs(posicaoDTOs);
 		relatorioExploracaoDTO.setSonda(sonda);
 		
 		return relatorioExploracaoDTO;

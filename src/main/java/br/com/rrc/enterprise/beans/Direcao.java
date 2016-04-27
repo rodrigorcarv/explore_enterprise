@@ -22,41 +22,41 @@ public enum Direcao {
 		
 		@Override
 		public void navegar(Coordenada coordenada) {
-			coordenada.getLongitude().incrementAndGet();
+			coordenada.incrementLongitude();
 		}
 
 		public boolean isCoordenadaValida(Coordenada coordenada, Dimensao dimensao) {
-			return coordenada.getLongitude().get() +1 > dimensao.getComprimento();
+			return coordenada.getLongitude() +1 > dimensao.getComprimento();
 		}
 	},
 	SUL("S") {
 		@Override
 		public void navegar(Coordenada coordenada) {
-			coordenada.getLongitude().decrementAndGet();
+			coordenada.decrementLongitude();
 		}
 		
 		public boolean isCoordenadaValida(Coordenada coordenada, Dimensao dimensao) {
-			return coordenada.getLongitude().get() -1 < 0;
+			return coordenada.getLongitude() -1 < 0;
 		}
 	},
 	LESTE("E") {
 		@Override
 		public void navegar(Coordenada coordenada) {
-			coordenada.getLatitude().incrementAndGet();
+			coordenada.incrementLatitude();
 		}
 		
 		public boolean isCoordenadaValida(Coordenada coordenada, Dimensao dimensao) {
-			return coordenada.getLatitude().get() +1 > dimensao.getLargura();
+			return coordenada.getLatitude() +1 > dimensao.getLargura();
 		}
 	},
 	OESTE("W") {
 		@Override
 		public void navegar(Coordenada coordenada) {
-			coordenada.getLatitude().decrementAndGet();
+			coordenada.decrementLatitude();
 		}
 		
 		public boolean isCoordenadaValida(Coordenada coordenada, Dimensao dimensao) {
-			return coordenada.getLatitude().get() -1 < 0;
+			return coordenada.getLatitude() -1 < 0;
 		}
 	};
 

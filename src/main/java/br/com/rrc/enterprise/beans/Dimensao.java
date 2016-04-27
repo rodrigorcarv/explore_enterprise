@@ -5,6 +5,8 @@ public class Dimensao {
 	private int comprimento;
 	private int largura;
 	
+	public Dimensao() {}
+
 	public Dimensao(int comprimento, int largura) {
 		super();
 		this.comprimento = comprimento;

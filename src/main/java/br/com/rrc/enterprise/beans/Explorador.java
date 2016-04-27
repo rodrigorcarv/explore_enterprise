@@ -4,9 +4,12 @@ import java.util.List;
 
 public class Explorador {
 	
+	
 	private Sonda sonda;
 	private List<Comando> comandos;
 	
+	public Explorador () {}
+
 	public Explorador(Sonda sonda, List<Comando> comandos) {
 		super();
 		this.sonda = sonda;

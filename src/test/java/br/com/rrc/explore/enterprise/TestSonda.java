@@ -1,7 +1,5 @@
 package br.com.rrc.explore.enterprise;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -16,9 +14,7 @@ public class TestSonda {
 	public void testViraSondaParaEsquerdaAtualDirecaoENorte() {
 		
 		String nome = "Maven";
-		AtomicInteger latitude = new AtomicInteger(1);
-		AtomicInteger longitude = new AtomicInteger(2);
-		Coordenada coordenada = new Coordenada(latitude , longitude);
+		Coordenada coordenada = new Coordenada(1 , 2);
 	
 		Sonda sonda = new Sonda(nome, coordenada, Direcao.NORTE);
 		sonda.virarEsquerda();
@@ -30,9 +26,7 @@ public class TestSonda {
 	public void testViraSondaParaDireitaAtualDirecaoENorte() {
 		
 		String nome = "Maven";
-		AtomicInteger latitude = new AtomicInteger(1);
-		AtomicInteger longitude = new AtomicInteger(2);
-		Coordenada coordenada = new Coordenada(latitude , longitude);
+		Coordenada coordenada = new Coordenada(1 , 2);
 	
 		Sonda sonda = new Sonda(nome, coordenada , Direcao.NORTE);
 		sonda.virarDireita();
@@ -44,9 +38,7 @@ public class TestSonda {
 	public void testViraSondaParaEsquerdaAtualDirecaoESul() {
 		
 		String nome = "Maven";
-		AtomicInteger latitude = new AtomicInteger(1);
-		AtomicInteger longitude = new AtomicInteger(2);
-		Coordenada coordenada = new Coordenada(latitude , longitude);
+		Coordenada coordenada = new Coordenada(1 , 2);
 	
 		Sonda sonda = new Sonda(nome, coordenada, Direcao.SUL);
 		sonda.virarEsquerda();
@@ -58,9 +50,7 @@ public class TestSonda {
 	public void testViraSondaParaDireitaAtualDirecaoESul() {
 		
 		String nome = "Maven";
-		AtomicInteger latitude = new AtomicInteger(1);
-		AtomicInteger longitude = new AtomicInteger(2);
-		Coordenada coordenada = new Coordenada(latitude , longitude);
+		Coordenada coordenada = new Coordenada(1 , 2);
 	
 		Sonda sonda = new Sonda(nome, coordenada , Direcao.SUL);
 		sonda.virarDireita();
@@ -72,9 +62,7 @@ public class TestSonda {
 	public void testViraSondaParaEsquerdaAtualDirecaoELeste() {
 		
 		String nome = "Maven";
-		AtomicInteger latitude = new AtomicInteger(1);
-		AtomicInteger longitude = new AtomicInteger(2);
-		Coordenada coordenada = new Coordenada(latitude , longitude);
+		Coordenada coordenada = new Coordenada(1 , 2);
 	
 		Sonda sonda = new Sonda(nome, coordenada, Direcao.LESTE);
 		sonda.virarEsquerda();
@@ -86,9 +74,7 @@ public class TestSonda {
 	public void testViraSondaParaDireitaAtualDirecaoELeste() {
 		
 		String nome = "Maven";
-		AtomicInteger latitude = new AtomicInteger(1);
-		AtomicInteger longitude = new AtomicInteger(2);
-		Coordenada coordenada = new Coordenada(latitude , longitude);
+		Coordenada coordenada = new Coordenada(1 , 2);
 	
 		Sonda sonda = new Sonda(nome, coordenada , Direcao.LESTE);
 		sonda.virarDireita();
@@ -100,9 +86,7 @@ public class TestSonda {
 	public void testViraSondaParaEsquerdaAtualDirecaoEOeste() {
 		
 		String nome = "Maven";
-		AtomicInteger latitude = new AtomicInteger(1);
-		AtomicInteger longitude = new AtomicInteger(2);
-		Coordenada coordenada = new Coordenada(latitude , longitude);
+		Coordenada coordenada = new Coordenada(1 , 2);
 	
 		Sonda sonda = new Sonda(nome, coordenada, Direcao.OESTE);
 		sonda.virarEsquerda();
@@ -114,9 +98,7 @@ public class TestSonda {
 	public void testViraSondaParaDireitaAtualDirecaoEOeste() {
 		
 		String nome = "Maven";
-		AtomicInteger latitude = new AtomicInteger(1);
-		AtomicInteger longitude = new AtomicInteger(2);
-		Coordenada coordenada = new Coordenada(latitude , longitude);
+		Coordenada coordenada = new Coordenada(1 , 2);
 	
 		Sonda sonda = new Sonda(nome, coordenada , Direcao.OESTE);
 		sonda.virarDireita();
@@ -125,15 +107,25 @@ public class TestSonda {
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
-	public void testViraSondaDireitaDirecaoNull() {
+	public void testViraSondaEsquerdaDirecaoNull() {
 		
 		String nome = "Maven";
-		AtomicInteger latitude = new AtomicInteger(1);
-		AtomicInteger longitude = new AtomicInteger(2);
-		Coordenada coordenada = new Coordenada(latitude , longitude);
+		Coordenada coordenada = new Coordenada(1 , 2);
 	
 		Sonda sonda = new Sonda(nome, coordenada , null );
 		sonda.virarEsquerda();
+		
+		Assert.fail("Deveria ter sido lancado a exececao IllegalArgumentException ");
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testViraSondaDireitaDirecaoNull() {
+		
+		String nome = "Maven";
+		Coordenada coordenada = new Coordenada(1 , 2);
+	
+		Sonda sonda = new Sonda(nome, coordenada , null );
+		sonda.virarDireita();
 		
 		Assert.fail("Deveria ter sido lancado a exececao IllegalArgumentException ");
 	}
@@ -143,9 +135,7 @@ public class TestSonda {
 	public void testMoverSondaParaForaDaDimensaoNaDirecaoNorte() {
 		
 		String nome = "Maven";
-		AtomicInteger latitude = new AtomicInteger(1);
-		AtomicInteger longitude = new AtomicInteger(5);
-		Coordenada coordenada = new Coordenada(latitude , longitude);
+		Coordenada coordenada = new Coordenada(1 , 5);
 	
 		Sonda sonda = new Sonda(nome, coordenada, Direcao.NORTE);
 		Dimensao dimensao = new Dimensao(5, 5);
@@ -158,9 +148,7 @@ public class TestSonda {
 	public void testMoverSondaParaForaDaDimensaoNaDirecaoSul() {
 		
 		String nome = "Maven";
-		AtomicInteger latitude = new AtomicInteger(3);
-		AtomicInteger longitude = new AtomicInteger(0);
-		Coordenada coordenada = new Coordenada(latitude , longitude);
+		Coordenada coordenada = new Coordenada(3 , 0);
 	
 		Sonda sonda = new Sonda(nome, coordenada, Direcao.SUL);
 		Dimensao dimensao = new Dimensao(5, 5);
@@ -173,9 +161,7 @@ public class TestSonda {
 	public void testMoverSondaParaForaDaDimensaoNaDirecaoLeste() {
 		
 		String nome = "Maven";
-		AtomicInteger latitude = new AtomicInteger(5);
-		AtomicInteger longitude = new AtomicInteger(3);
-		Coordenada coordenada = new Coordenada(latitude , longitude);
+		Coordenada coordenada = new Coordenada(5 , 3);
 	
 		Sonda sonda = new Sonda(nome, coordenada, Direcao.LESTE);
 		Dimensao dimensao = new Dimensao(5, 5);
@@ -188,9 +174,7 @@ public class TestSonda {
 	public void testMoverSondaParaForaDaDimensaoNaDirecaoOeste() {
 		
 		String nome = "Maven";
-		AtomicInteger latitude = new AtomicInteger(0);
-		AtomicInteger longitude = new AtomicInteger(3);
-		Coordenada coordenada = new Coordenada(latitude , longitude);
+		Coordenada coordenada = new Coordenada(0 , 3);
 	
 		Sonda sonda = new Sonda(nome, coordenada, Direcao.OESTE);
 		Dimensao dimensao = new Dimensao(5, 5);
@@ -203,59 +187,51 @@ public class TestSonda {
 	public void testMoverSondaNaDirecaoNorte() {
 		
 		String nome = "Maven";
-		AtomicInteger latitude = new AtomicInteger(2);
-		AtomicInteger longitude = new AtomicInteger(2);
-		Coordenada coordenada = new Coordenada(latitude , longitude);
+		Coordenada coordenada = new Coordenada(2 , 2);
 	
 		Sonda sonda = new Sonda(nome, coordenada, Direcao.NORTE);
 		Dimensao dimensao = new Dimensao(5, 5);
 		sonda.mover(dimensao);
 		
-		Assert.assertEquals(sonda.getCoordenada(), new Coordenada(new AtomicInteger(2), new AtomicInteger(3)));
+		Assert.assertEquals(sonda.getCoordenada(), new Coordenada(2, 3));
 	}
 	
 	@Test
 	public void testMoverSondaSondaNaDirecaoSul() {
 		
 		String nome = "Maven";
-		AtomicInteger latitude = new AtomicInteger(2);
-		AtomicInteger longitude = new AtomicInteger(2);
-		Coordenada coordenada = new Coordenada(latitude , longitude);
+		Coordenada coordenada = new Coordenada(2 , 2);
 	
 		Sonda sonda = new Sonda(nome, coordenada, Direcao.SUL);
 		Dimensao dimensao = new Dimensao(5, 5);
 		sonda.mover(dimensao);
 		
-		Assert.assertEquals(sonda.getCoordenada(), new Coordenada(new AtomicInteger(2), new AtomicInteger(1)));
+		Assert.assertEquals(sonda.getCoordenada(), new Coordenada(2, 1));
 	}
 	
 	@Test
 	public void testMoverSondaSondaNaDirecaoLeste() {
 		
 		String nome = "Maven";
-		AtomicInteger latitude = new AtomicInteger(2);
-		AtomicInteger longitude = new AtomicInteger(2);
-		Coordenada coordenada = new Coordenada(latitude , longitude);
+		Coordenada coordenada = new Coordenada(2 , 2);
 	
 		Sonda sonda = new Sonda(nome, coordenada, Direcao.LESTE);
 		Dimensao dimensao = new Dimensao(5, 5);
 		sonda.mover(dimensao);
 		
-		Assert.assertEquals(sonda.getCoordenada(), new Coordenada(new AtomicInteger(3), new AtomicInteger(2)));
+		Assert.assertEquals(sonda.getCoordenada(), new Coordenada(3, 2));
 	}
 	
 	@Test
 	public void testMoverSondaNaDirecaoOeste() {
 		
 		String nome = "Maven";
-		AtomicInteger latitude = new AtomicInteger(2);
-		AtomicInteger longitude = new AtomicInteger(2);
-		Coordenada coordenada = new Coordenada(latitude , longitude);
+		Coordenada coordenada = new Coordenada(2 , 2);
 	
 		Sonda sonda = new Sonda(nome, coordenada, Direcao.OESTE);
 		Dimensao dimensao = new Dimensao(5, 5);
 		sonda.mover(dimensao);
 		
-		Assert.assertEquals(sonda.getCoordenada(), new Coordenada(new AtomicInteger(1), new AtomicInteger(2)));
+		Assert.assertEquals(sonda.getCoordenada(), new Coordenada(1, 2));
 	}
 }

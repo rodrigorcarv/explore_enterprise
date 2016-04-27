@@ -95,8 +95,8 @@ public class MapaConvert {
 	 */
 	private Sonda string2Sonda(String coordenadaLatitude, String coordenadaLongitude, String direcaoSonda) {
 
-		AtomicInteger latitude = StringConvert.INSTANCE.convertFromString(AtomicInteger.class, coordenadaLatitude);
-		AtomicInteger longitude = StringConvert.INSTANCE.convertFromString(AtomicInteger.class, coordenadaLongitude);
+		int latitude = StringConvert.INSTANCE.convertFromString(int.class, coordenadaLatitude);
+		int longitude = StringConvert.INSTANCE.convertFromString(int.class, coordenadaLongitude);
 		Coordenada coordenada = new Coordenada(latitude , longitude);
 		Direcao direcao = Direcao.buscaCoordenada(direcaoSonda); 
 		Sonda sonda = new Sonda(coordenada, direcao);

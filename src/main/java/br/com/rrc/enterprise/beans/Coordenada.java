@@ -12,27 +12,36 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @author rodrigo
  *
  */
-public class Coordenada {
+public class Coordenada implements Cloneable{
 	
-	private AtomicInteger latitude;
-	private AtomicInteger longitude;
+	private int latitude;
+	private int longitude;
 	
-	public Coordenada(AtomicInteger latitude, AtomicInteger longitude) {
+	public Coordenada() {}
+	
+	public Coordenada(int latitude, int longitude) {
 		super();
 		this.latitude = latitude;
 		this.longitude = longitude;
 	}
 	
-	public AtomicInteger getLatitude() {
+    public Coordenada clone() throws CloneNotSupportedException {  
+    	
+    	Coordenada clonada = new Coordenada(latitude, longitude);  
+        return clonada;  
+    }  
+	
+	
+	public int getLatitude() {
 		return latitude;
 	}
-	public void setLatitude(AtomicInteger latitude) {
+	public void setLatitude(int latitude) {
 		this.latitude = latitude;
 	}
-	public AtomicInteger getLongitude() {
+	public int getLongitude() {
 		return longitude;
 	}
-	public void setLongitude(AtomicInteger longitude) {
+	public void setLongitude(int longitude) {
 		this.longitude = longitude;
 	}
 
@@ -40,8 +49,8 @@ public class Coordenada {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((latitude == null) ? 0 : latitude.hashCode());
-		result = prime * result + ((longitude == null) ? 0 : longitude.hashCode());
+		result = prime * result + latitude;
+		result = prime * result + longitude;
 		return result;
 	}
 
@@ -54,22 +63,31 @@ public class Coordenada {
 		if (getClass() != obj.getClass())
 			return false;
 		Coordenada other = (Coordenada) obj;
-		if (latitude == null) {
-			if (other.latitude != null)
-				return false;
-		} else if (!(latitude.intValue() == other.latitude.intValue()))
+		if (latitude != other.latitude)
 			return false;
-		if (longitude == null) {
-			if (other.longitude != null)
-				return false;
-		} else if (!(longitude.intValue() == other.longitude.intValue()))
+		if (longitude != other.longitude)
 			return false;
 		return true;
 	}
-	
 
 	@Override
 	public String toString() {
 		return String.format("Coordenada [latitude=%s, longitude=%s]", latitude, longitude);
+	}
+
+	public void incrementLongitude() {
+		++longitude;
+	}
+
+	public void decrementLongitude() {
+		--longitude;
+	}
+
+	public void incrementLatitude() {
+		++latitude;
+	}
+
+	public void decrementLatitude() {
+		--latitude;
 	}
 }
