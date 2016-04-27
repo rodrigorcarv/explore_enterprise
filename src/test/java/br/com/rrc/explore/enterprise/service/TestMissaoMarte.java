@@ -10,15 +10,15 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import br.com.rrc.enterprise.beans.Comando;
-import br.com.rrc.enterprise.beans.Coordenada;
-import br.com.rrc.enterprise.beans.Dimensao;
-import br.com.rrc.enterprise.beans.Direcao;
-import br.com.rrc.enterprise.beans.Explorador;
-import br.com.rrc.enterprise.beans.Sonda;
-import br.com.rrc.enterprise.dto.RelatorioExploracaoDTO;
-import br.com.rrc.enterprise.service.impl.MissaoServiceImpl;
 import br.com.rrc.explore.enterprise.ExploreEnterpriseApplication;
+import br.com.rrc.explore.enterprise.beans.Comando;
+import br.com.rrc.explore.enterprise.beans.Coordenada;
+import br.com.rrc.explore.enterprise.beans.Dimensao;
+import br.com.rrc.explore.enterprise.beans.Direcao;
+import br.com.rrc.explore.enterprise.beans.Explorador;
+import br.com.rrc.explore.enterprise.beans.Sonda;
+import br.com.rrc.explore.enterprise.dto.RelatorioExploracaoDTO;
+import br.com.rrc.explore.enterprise.service.impl.MissaoServiceImpl;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = ExploreEnterpriseApplication.class)

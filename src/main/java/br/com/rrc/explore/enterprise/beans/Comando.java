@@ -1,4 +1,4 @@
-package br.com.rrc.enterprise.beans;
+package br.com.rrc.explore.enterprise.beans;
 
 import java.util.ArrayList;
 import java.util.List;

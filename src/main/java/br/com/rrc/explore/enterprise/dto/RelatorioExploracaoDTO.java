@@ -1,8 +1,8 @@
-package br.com.rrc.enterprise.dto;
+package br.com.rrc.explore.enterprise.dto;
 
 import java.util.List;
 
-import br.com.rrc.enterprise.beans.Sonda;
+import br.com.rrc.explore.enterprise.beans.Sonda;
 
 public class RelatorioExploracaoDTO {
 	

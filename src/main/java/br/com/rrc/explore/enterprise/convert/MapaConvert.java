@@ -1,25 +1,24 @@
-package br.com.rrc.enterprise.convert;
+package br.com.rrc.explore.enterprise.convert;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.joda.convert.StringConvert;
 import org.springframework.stereotype.Component;
 
-import br.com.rrc.enterprise.beans.Comando;
-import br.com.rrc.enterprise.beans.Coordenada;
-import br.com.rrc.enterprise.beans.Dimensao;
-import br.com.rrc.enterprise.beans.Direcao;
-import br.com.rrc.enterprise.beans.Explorador;
-import br.com.rrc.enterprise.beans.Mapa;
-import br.com.rrc.enterprise.beans.Sonda;
+import br.com.rrc.explore.enterprise.beans.Comando;
+import br.com.rrc.explore.enterprise.beans.Coordenada;
+import br.com.rrc.explore.enterprise.beans.Dimensao;
+import br.com.rrc.explore.enterprise.beans.Direcao;
+import br.com.rrc.explore.enterprise.beans.Explorador;
+import br.com.rrc.explore.enterprise.beans.Mapa;
+import br.com.rrc.explore.enterprise.beans.Sonda;
 
 /**
- * Classe responsavel por convert as um 
+ * Classe responsavel por convert as entradas de dos via text plain
  * 
  * 
  * @author rodrigo

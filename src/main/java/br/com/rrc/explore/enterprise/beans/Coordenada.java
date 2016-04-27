@@ -1,4 +1,4 @@
-package br.com.rrc.enterprise.beans;
+package br.com.rrc.explore.enterprise.beans;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -27,7 +27,7 @@ public class Coordenada implements Cloneable{
 	
     public Coordenada clone() throws CloneNotSupportedException {  
     	
-    	Coordenada clonada = new Coordenada(latitude, longitude);  
+    	Coordenada clonada = (Coordenada) super.clone();  
         return clonada;  
     }  
 	

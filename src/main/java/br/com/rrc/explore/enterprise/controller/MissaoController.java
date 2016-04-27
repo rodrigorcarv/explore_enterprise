@@ -1,4 +1,4 @@
-package br.com.rrc.enterprise.controller;
+package br.com.rrc.explore.enterprise.controller;
 
 import java.util.List;
 
@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.rrc.enterprise.beans.Coordenada;
-import br.com.rrc.enterprise.beans.Direcao;
-import br.com.rrc.enterprise.beans.Mapa;
-import br.com.rrc.enterprise.beans.Sonda;
-import br.com.rrc.enterprise.convert.MapaConvert;
-import br.com.rrc.enterprise.dto.RelatorioExploracaoDTO;
-import br.com.rrc.enterprise.service.MissaoService;
+import br.com.rrc.explore.enterprise.beans.Coordenada;
+import br.com.rrc.explore.enterprise.beans.Direcao;
+import br.com.rrc.explore.enterprise.beans.Mapa;
+import br.com.rrc.explore.enterprise.beans.Sonda;
+import br.com.rrc.explore.enterprise.convert.MapaConvert;
+import br.com.rrc.explore.enterprise.dto.RelatorioExploracaoDTO;
+import br.com.rrc.explore.enterprise.service.MissaoService;
 
 @RestController
 @RequestMapping(value="/missao")

@@ -6,7 +6,7 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
-import br.com.rrc.enterprise.beans.Comando;
+import br.com.rrc.explore.enterprise.beans.Comando;
 
 public class TestComando {
 	

@@ -21,14 +21,14 @@ import com.google.gson.Gson;
 import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.http.ContentType;
 
-import br.com.rrc.enterprise.beans.Comando;
-import br.com.rrc.enterprise.beans.Coordenada;
-import br.com.rrc.enterprise.beans.Dimensao;
-import br.com.rrc.enterprise.beans.Direcao;
-import br.com.rrc.enterprise.beans.Explorador;
-import br.com.rrc.enterprise.beans.Mapa;
-import br.com.rrc.enterprise.beans.Sonda;
 import br.com.rrc.explore.enterprise.ExploreEnterpriseApplication;
+import br.com.rrc.explore.enterprise.beans.Comando;
+import br.com.rrc.explore.enterprise.beans.Coordenada;
+import br.com.rrc.explore.enterprise.beans.Dimensao;
+import br.com.rrc.explore.enterprise.beans.Direcao;
+import br.com.rrc.explore.enterprise.beans.Explorador;
+import br.com.rrc.explore.enterprise.beans.Mapa;
+import br.com.rrc.explore.enterprise.beans.Sonda;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = ExploreEnterpriseApplication.class)

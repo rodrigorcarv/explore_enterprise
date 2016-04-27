@@ -3,10 +3,10 @@ package br.com.rrc.explore.enterprise;
 import org.junit.Assert;
 import org.junit.Test;
 
-import br.com.rrc.enterprise.beans.Coordenada;
-import br.com.rrc.enterprise.beans.Dimensao;
-import br.com.rrc.enterprise.beans.Direcao;
-import br.com.rrc.enterprise.beans.Sonda;
+import br.com.rrc.explore.enterprise.beans.Coordenada;
+import br.com.rrc.explore.enterprise.beans.Dimensao;
+import br.com.rrc.explore.enterprise.beans.Direcao;
+import br.com.rrc.explore.enterprise.beans.Sonda;
 
 public class TestSonda {
 
