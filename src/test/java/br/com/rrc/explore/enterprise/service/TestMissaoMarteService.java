@@ -25,7 +25,7 @@ import br.com.rrc.explore.enterprise.service.impl.MissaoServiceImpl;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = ExploreEnterpriseApplication.class)
 @WebAppConfiguration
-public class TestMissaoMarte {
+public class TestMissaoMarteService {
 	
 	@Inject
 	MissaoServiceImpl missaoMarteService;

@@ -97,6 +97,46 @@ public class TestMissaoController {
 	@Test
 	public void exploraTestDimensoesInvalidas() throws IOException {
 
+		Mapa mapa = new Mapa();
+		mapa.setDimensao(null);
+		
+		mapa.setExploradores(exploradores());
+		
+		String json = objectToJson(mapa);
+		
+		given().
+			contentType(ContentType.JSON).
+			body(json).
+		when().
+			post("/missao/exploracao-detalhada").
+		then().
+			statusCode(HttpStatus.SC_BAD_REQUEST);
+
+	}
+
+	@Test
+	public void exploraTestDimensoesNull() throws IOException {
+		
+		Mapa mapa = new Mapa();
+		mapa.setDimensao(null);
+		
+		mapa.setExploradores(exploradores());
+
+		String json = objectToJson(mapa);
+
+		given().
+			contentType(ContentType.JSON).
+			body(json).
+		when().
+			post("/missao/exploracao-detalhada").
+		then().
+			statusCode(HttpStatus.SC_BAD_REQUEST);
+
+	}
+	
+	@Test
+	public void exploraTestDimensoesComprimentoMenorQueZero() throws IOException {
+		
 		int comprimento = -1;
 		int largura = 5;
 		
@@ -104,15 +144,96 @@ public class TestMissaoController {
 		Dimensao dimensao = new Dimensao(comprimento, largura);
 		mapa.setDimensao(dimensao);
 		
-		Explorador phoenix = exploradoraPhoenix();
-		Explorador obiter = exploradoraObiter();
+		mapa.setExploradores(exploradores());
+
+		String json = objectToJson(mapa);
+
+		given().
+			contentType(ContentType.JSON).
+			body(json).
+		when().
+			post("/missao/exploracao-detalhada").
+		then().
+			statusCode(HttpStatus.SC_BAD_REQUEST);
+
+	}
+	
+	@Test
+	public void exploraTestDimensoesLarguraMenorQueZero() throws IOException {
+		
+		int comprimento = 5;
+		int largura = -1;
+		
+		Mapa mapa = new Mapa();
+		Dimensao dimensao = new Dimensao(comprimento, largura);
+		mapa.setDimensao(dimensao);
+		
+		mapa.setExploradores(exploradores());
+
+		String json = objectToJson(mapa);
+
+		given().
+			contentType(ContentType.JSON).
+			body(json).
+		when().
+			post("/missao/exploracao-detalhada").
+		then().
+			statusCode(HttpStatus.SC_BAD_REQUEST);
+
+	}
+	
+	@Test
+	public void exploraTestExploradoresNull() throws IOException {
+		
+		int comprimento = 5;
+		int largura = 5;
+		
+		Mapa mapa = new Mapa();
+		Dimensao dimensao = new Dimensao(comprimento, largura);
+		mapa.setDimensao(dimensao);
+		
+		mapa.setExploradores(null);
+
+		String json = objectToJson(mapa);
+
+		given().
+			contentType(ContentType.JSON).
+			body(json).
+		when().
+			post("/missao/exploracao-detalhada").
+		then().
+			statusCode(HttpStatus.SC_BAD_REQUEST);
+
+	}
+	
+	@Test
+	public void exploraTestExploradoresSondaNull() throws IOException {
+		
+		int comprimento = 5;
+		int largura = 5;
+		
+		Mapa mapa = new Mapa();
+		Dimensao dimensao = new Dimensao(comprimento, largura);
+		mapa.setDimensao(dimensao);
 		
 		List<Explorador> exploradores = new ArrayList<>();
-		exploradores.add(phoenix);
-		exploradores.add(obiter);
 		
-		mapa.setExploradores(exploradores);
+		Sonda sonda = null;
+
+		List<Comando> comandos = new ArrayList<Comando>();
 		
+		comandos.add(Comando.ESQUERDA);
+		comandos.add(Comando.MOVER);
+		comandos.add(Comando.ESQUERDA);
+		comandos.add(Comando.MOVER);
+		comandos.add(Comando.ESQUERDA);
+		comandos.add(Comando.MOVER);
+		comandos.add(Comando.ESQUERDA);
+		comandos.add(Comando.MOVER);
+		comandos.add(Comando.MOVER);
+		
+		exploradores.add(new Explorador(sonda, comandos));
+
 		String json = objectToJson(mapa);
 
 		given().
@@ -125,6 +246,230 @@ public class TestMissaoController {
 
 	}
 
+	
+	@Test
+	public void exploraTestExploradoresComandosNull() throws IOException {
+		
+		int comprimento = 5;
+		int largura = 5;
+		
+		Mapa mapa = new Mapa();
+		Dimensao dimensao = new Dimensao(comprimento, largura);
+		mapa.setDimensao(dimensao);
+		
+		List<Explorador> exploradores = new ArrayList<>();
+
+		Sonda sonda = new Sonda(null , Direcao.NORTE);
+		sonda.setNome("Phoenix");
+
+		List<Comando> comandos = new ArrayList<Comando>();
+		
+		comandos.add(Comando.ESQUERDA);
+		comandos.add(Comando.MOVER);
+		comandos.add(Comando.ESQUERDA);
+		comandos.add(Comando.MOVER);
+		comandos.add(Comando.ESQUERDA);
+		comandos.add(Comando.MOVER);
+		comandos.add(Comando.ESQUERDA);
+		comandos.add(Comando.MOVER);
+		comandos.add(Comando.MOVER);
+		
+		exploradores.add(new Explorador(sonda, comandos));
+
+		String json = objectToJson(mapa);
+
+		given().
+			contentType(ContentType.JSON).
+			body(json).
+		when().
+			post("/missao/exploracao-detalhada").
+		then().
+			statusCode(HttpStatus.SC_BAD_REQUEST);
+
+	}
+	
+	@Test
+	public void exploraTestExploradoresDirecaoNull() throws IOException {
+		
+		int comprimento = 5;
+		int largura = 5;
+		
+		Mapa mapa = new Mapa();
+		Dimensao dimensao = new Dimensao(comprimento, largura);
+		mapa.setDimensao(dimensao);
+		
+		List<Explorador> exploradores = new ArrayList<>();
+
+		Coordenada coordenada = new Coordenada(1, 2);
+		Sonda sonda = new Sonda(coordenada , null);
+		sonda.setNome("Phoenix");
+
+		List<Comando> comandos = new ArrayList<Comando>();
+		
+		comandos.add(Comando.ESQUERDA);
+		comandos.add(Comando.MOVER);
+		comandos.add(Comando.ESQUERDA);
+		comandos.add(Comando.MOVER);
+		comandos.add(Comando.ESQUERDA);
+		comandos.add(Comando.MOVER);
+		comandos.add(Comando.ESQUERDA);
+		comandos.add(Comando.MOVER);
+		comandos.add(Comando.MOVER);
+		
+		exploradores.add(new Explorador(sonda, comandos));
+
+		String json = objectToJson(mapa);
+
+		given().
+			contentType(ContentType.JSON).
+			body(json).
+		when().
+			post("/missao/exploracao-detalhada").
+		then().
+			statusCode(HttpStatus.SC_BAD_REQUEST);
+
+	}
+	
+	
+	@Test
+	public void exploraTestExploradoresSondaCoordenadaNull() throws IOException {
+		
+		int comprimento = 5;
+		int largura = 5;
+		
+		Mapa mapa = new Mapa();
+		Dimensao dimensao = new Dimensao(comprimento, largura);
+		mapa.setDimensao(dimensao);
+		
+		List<Explorador> exploradores = new ArrayList<>();
+
+		Sonda sonda = new Sonda(null , Direcao.NORTE);
+		sonda.setNome("Phoenix");
+		
+		List<Comando> comandos = new ArrayList<Comando>();
+		
+		comandos.add(Comando.ESQUERDA);
+		comandos.add(Comando.MOVER);
+		comandos.add(Comando.ESQUERDA);
+		comandos.add(Comando.MOVER);
+		comandos.add(Comando.ESQUERDA);
+		comandos.add(Comando.MOVER);
+		comandos.add(Comando.ESQUERDA);
+		comandos.add(Comando.MOVER);
+		comandos.add(Comando.MOVER);
+		
+		exploradores.add(new Explorador(sonda, comandos));
+
+		String json = objectToJson(mapa);
+
+		given().
+			contentType(ContentType.JSON).
+			body(json).
+		when().
+			post("/missao/exploracao-detalhada").
+		then().
+			statusCode(HttpStatus.SC_BAD_REQUEST);
+
+	}
+	
+	
+	@Test
+	public void exploraTestExploradoresSondaCoordenadaLatitudeMenorQueZero() throws IOException {
+		
+		int comprimento = 5;
+		int largura = 5;
+		
+		Mapa mapa = new Mapa();
+		Dimensao dimensao = new Dimensao(comprimento, largura);
+		mapa.setDimensao(dimensao);
+		
+		List<Explorador> exploradores = new ArrayList<>();
+
+		Coordenada coordenada = new Coordenada(-1, 2);
+		Sonda sonda = new Sonda(coordenada , Direcao.NORTE);
+		sonda.setNome("Phoenix");
+		
+		List<Comando> comandos = new ArrayList<Comando>();
+		
+		comandos.add(Comando.ESQUERDA);
+		comandos.add(Comando.MOVER);
+		comandos.add(Comando.ESQUERDA);
+		comandos.add(Comando.MOVER);
+		comandos.add(Comando.ESQUERDA);
+		comandos.add(Comando.MOVER);
+		comandos.add(Comando.ESQUERDA);
+		comandos.add(Comando.MOVER);
+		comandos.add(Comando.MOVER);
+		
+		exploradores.add(new Explorador(sonda, comandos));
+
+		String json = objectToJson(mapa);
+
+		given().
+			contentType(ContentType.JSON).
+			body(json).
+		when().
+			post("/missao/exploracao-detalhada").
+		then().
+			statusCode(HttpStatus.SC_BAD_REQUEST);
+
+	}
+	
+	@Test
+	public void exploraTestExploradoresSondaCoordenadaLongitudeMenorQueZero() throws IOException {
+		
+		int comprimento = 5;
+		int largura = 5;
+		
+		Mapa mapa = new Mapa();
+		Dimensao dimensao = new Dimensao(comprimento, largura);
+		mapa.setDimensao(dimensao);
+		
+		List<Explorador> exploradores = new ArrayList<>();
+
+		Coordenada coordenada = new Coordenada(1, -2);
+		Sonda sonda = new Sonda(coordenada , Direcao.NORTE);
+		sonda.setNome("Phoenix");
+		
+		List<Comando> comandos = new ArrayList<Comando>();
+		
+		comandos.add(Comando.ESQUERDA);
+		comandos.add(Comando.MOVER);
+		comandos.add(Comando.ESQUERDA);
+		comandos.add(Comando.MOVER);
+		comandos.add(Comando.ESQUERDA);
+		comandos.add(Comando.MOVER);
+		comandos.add(Comando.ESQUERDA);
+		comandos.add(Comando.MOVER);
+		comandos.add(Comando.MOVER);
+		
+		exploradores.add(new Explorador(sonda, comandos));
+
+		String json = objectToJson(mapa);
+
+		given().
+			contentType(ContentType.JSON).
+			body(json).
+		when().
+			post("/missao/exploracao-detalhada").
+		then().
+			statusCode(HttpStatus.SC_BAD_REQUEST);
+
+	}
+	
+	
+	
+	private List<Explorador> exploradores() {
+		
+		Explorador phoenix = exploradoraPhoenix();
+		Explorador obiter = exploradoraObiter();
+		
+		List<Explorador> exploradores = new ArrayList<>();
+		exploradores.add(phoenix);
+		exploradores.add(obiter);
+		
+		return exploradores;
+	}
 	
 	private Explorador exploradoraPhoenix() {
 
@@ -169,20 +514,6 @@ public class TestMissaoController {
 		
 		return new Explorador(sonda, comandos);
 	}
-	
-	 /**
-     * Converte o JSON na Classe informada
-     *
-     * @param json JSON recebido
-     * @param retorno  Classe a ser retornada
-     *
-     * @return Retorna a classe informada no retorno populada com os dados do JSON.
-     */
-    private <T> T jsonToObject(String json, Class retorno){
-
-        Gson gson = new Gson();
-        return (T) gson.fromJson(json, retorno);
-    }
     
     /**
      * Converte um Object e um JSON

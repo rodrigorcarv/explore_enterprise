@@ -2,8 +2,7 @@ package br.com.rrc.explore.enterprise.exceptions;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.inject.Inject;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -17,10 +16,14 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import br.com.rrc.explore.enterprise.utils.MessageByLocaleService;
+
 @ControllerAdvice
-//@EnableWebMvc
 public class ErrorHandler {
 
+	@Inject
+	MessageByLocaleService messageByLocaleService;
+	
 	private final Log LOG = LogFactory.getLog(this.getClass());
 
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -52,10 +55,11 @@ public class ErrorHandler {
 	}
 
 	public ValidationError processFieldErrors(List<FieldError> fieldErrors) {
+		
 		ValidationError dto = new ValidationError();
 
 		for (FieldError fieldError: fieldErrors) {
-			dto.addFieldError(fieldError.getField(), fieldError.getDefaultMessage());
+			dto.addFieldError(fieldError.getField(), messageByLocaleService.getMessage(fieldError.getDefaultMessage()));
 		}
 
 		return dto;

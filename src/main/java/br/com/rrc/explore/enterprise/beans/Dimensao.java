@@ -1,9 +1,15 @@
 package br.com.rrc.explore.enterprise.beans;
 
+import javax.validation.constraints.Min;
+
 public class Dimensao {
 	
+	@Min(value = 0, message = "coordenada.comprimento.min.um.requerido")
 	private int comprimento;
+	
+	@Min(value = 0, message = "coordenada.largura.min.um.requerido")
 	private int largura;
+	
 	
 	public Dimensao() {}
 

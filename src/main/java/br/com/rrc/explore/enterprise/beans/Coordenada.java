@@ -1,5 +1,7 @@
 package br.com.rrc.explore.enterprise.beans;
 
+import javax.validation.constraints.Min;
+
 /**
  * Classe {@link Coordenada} representa um ponto unico no planeta 
  * a ser explorado.
@@ -12,7 +14,10 @@ package br.com.rrc.explore.enterprise.beans;
  */
 public class Coordenada implements Cloneable{
 	
+	@Min(value = 0, message = "coordenada.latitude.min.um.requerido")
 	private int latitude;
+	
+	@Min(value = 0, message = "coordenada.longitude.min.um.requerido")
 	private int longitude;
 	
 	public Coordenada() {}

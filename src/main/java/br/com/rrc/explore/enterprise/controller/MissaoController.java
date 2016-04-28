@@ -5,7 +5,6 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.validation.Valid;
 
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -51,7 +50,7 @@ public class MissaoController {
 	}
 
 	@RequestMapping(value = "/exploracao-detalhada", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
-	public @ResponseBody List<RelatorioExploracaoDTO> missao (@Valid @Validated @RequestBody  Mapa mapa){
+	public @ResponseBody List<RelatorioExploracaoDTO> missao (@Valid @RequestBody  Mapa mapa){
 		return missaoService.explorar(mapa);
 	}
 }

@@ -2,9 +2,18 @@ package br.com.rrc.explore.enterprise.beans;
 
 import java.util.List;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
 public class Mapa {
 	
+
+	@NotNull(message = "dimensao.requerida")
+	@Valid
 	private Dimensao dimensao;
+	
+	@NotNull(message = "exploradores.requerido")
+	@Valid
 	private List<Explorador> exploradores;
 
 	public Dimensao getDimensao() {

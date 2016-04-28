@@ -2,12 +2,19 @@ package br.com.rrc.explore.enterprise.beans;
 
 import java.util.List;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
 import br.com.rrc.explore.enterprise.beans.enums.Comando;
 
 public class Explorador {
 	
-	
+	@NotNull(message="sonda.requerida")
+	@Valid
 	private Sonda sonda;
+	
+	@NotNull(message="comandos.requerido")
+	@Valid
 	private List<Comando> comandos;
 	
 	public Explorador () {}
