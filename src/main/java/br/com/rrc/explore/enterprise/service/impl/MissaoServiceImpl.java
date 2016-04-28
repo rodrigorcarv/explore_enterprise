@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import br.com.rrc.explore.enterprise.beans.Comando;
 import br.com.rrc.explore.enterprise.beans.Coordenada;
 import br.com.rrc.explore.enterprise.beans.Dimensao;
 import br.com.rrc.explore.enterprise.beans.Explorador;
@@ -14,6 +13,7 @@ import br.com.rrc.explore.enterprise.beans.Movimentar;
 import br.com.rrc.explore.enterprise.beans.Sonda;
 import br.com.rrc.explore.enterprise.beans.VirarDireita;
 import br.com.rrc.explore.enterprise.beans.VirarEsquerda;
+import br.com.rrc.explore.enterprise.beans.enums.Comando;
 import br.com.rrc.explore.enterprise.dto.PosicaoDTO;
 import br.com.rrc.explore.enterprise.dto.RelatorioExploracaoDTO;
 import br.com.rrc.explore.enterprise.service.MissaoService;
@@ -56,7 +56,7 @@ public class MissaoServiceImpl implements MissaoService {
 				posicaoDTO = new PosicaoDTO(coordenada.clone(), sonda.getDirecao());
 				posicaoDTOs.add(posicaoDTO);
 			} catch (CloneNotSupportedException e) {
-				e.printStackTrace();
+				throw new RuntimeException("Não foi possível realizar o clone da coordenada");
 			}
 		}
 		

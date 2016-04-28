@@ -1,7 +1,7 @@
 package br.com.rrc.explore.enterprise.dto;
 
 import br.com.rrc.explore.enterprise.beans.Coordenada;
-import br.com.rrc.explore.enterprise.beans.Direcao;
+import br.com.rrc.explore.enterprise.beans.enums.Direcao;
 
 public class PosicaoDTO {
 	

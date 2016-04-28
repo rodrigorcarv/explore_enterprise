@@ -2,6 +2,8 @@ package br.com.rrc.explore.enterprise.beans;
 
 import java.util.List;
 
+import br.com.rrc.explore.enterprise.beans.enums.Comando;
+
 public class Explorador {
 	
 	

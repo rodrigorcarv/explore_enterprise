@@ -6,13 +6,13 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
-import br.com.rrc.explore.enterprise.beans.Comando;
 import br.com.rrc.explore.enterprise.beans.Coordenada;
 import br.com.rrc.explore.enterprise.beans.Dimensao;
-import br.com.rrc.explore.enterprise.beans.Direcao;
 import br.com.rrc.explore.enterprise.beans.Explorador;
 import br.com.rrc.explore.enterprise.beans.Mapa;
 import br.com.rrc.explore.enterprise.beans.Sonda;
+import br.com.rrc.explore.enterprise.beans.enums.Comando;
+import br.com.rrc.explore.enterprise.beans.enums.Direcao;
 import br.com.rrc.explore.enterprise.convert.MapaConvert;
 
 public class TestConvert {

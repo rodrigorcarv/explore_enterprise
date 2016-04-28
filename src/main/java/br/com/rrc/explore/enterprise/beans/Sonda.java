@@ -1,5 +1,7 @@
 package br.com.rrc.explore.enterprise.beans;
 
+import br.com.rrc.explore.enterprise.beans.enums.Direcao;
+
 public class Sonda {
 	
 	private static final String MSG_ERR0_COMANDO_INFORMADO_RESULTARAM_EM_UMA_COORDENADA_INVALDIA = "Os comando informados levam a sonda para um coordena invalida";

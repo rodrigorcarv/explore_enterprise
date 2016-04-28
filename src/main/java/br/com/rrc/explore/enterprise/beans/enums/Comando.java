@@ -1,4 +1,4 @@
-package br.com.rrc.explore.enterprise.beans;
+package br.com.rrc.explore.enterprise.beans.enums;
 
 import java.util.ArrayList;
 import java.util.List;

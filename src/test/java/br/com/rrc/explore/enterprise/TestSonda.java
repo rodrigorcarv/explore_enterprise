@@ -5,8 +5,8 @@ import org.junit.Test;
 
 import br.com.rrc.explore.enterprise.beans.Coordenada;
 import br.com.rrc.explore.enterprise.beans.Dimensao;
-import br.com.rrc.explore.enterprise.beans.Direcao;
 import br.com.rrc.explore.enterprise.beans.Sonda;
+import br.com.rrc.explore.enterprise.beans.enums.Direcao;
 
 public class TestSonda {
 

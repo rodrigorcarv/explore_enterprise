@@ -1,4 +1,7 @@
-package br.com.rrc.explore.enterprise.beans;
+package br.com.rrc.explore.enterprise.beans.enums;
+
+import br.com.rrc.explore.enterprise.beans.Coordenada;
+import br.com.rrc.explore.enterprise.beans.Dimensao;
 
 /**
  *  Enum para indicar os pontos cardiais 

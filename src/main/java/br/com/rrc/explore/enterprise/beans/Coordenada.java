@@ -1,7 +1,5 @@
 package br.com.rrc.explore.enterprise.beans;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 /**
  * Classe {@link Coordenada} representa um ponto unico no planeta 
  * a ser explorado.

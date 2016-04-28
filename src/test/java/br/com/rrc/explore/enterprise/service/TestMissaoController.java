@@ -1,7 +1,6 @@
 package br.com.rrc.explore.enterprise.service;
 
 import static com.jayway.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.equalTo;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,13 +21,13 @@ import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.http.ContentType;
 
 import br.com.rrc.explore.enterprise.ExploreEnterpriseApplication;
-import br.com.rrc.explore.enterprise.beans.Comando;
 import br.com.rrc.explore.enterprise.beans.Coordenada;
 import br.com.rrc.explore.enterprise.beans.Dimensao;
-import br.com.rrc.explore.enterprise.beans.Direcao;
 import br.com.rrc.explore.enterprise.beans.Explorador;
 import br.com.rrc.explore.enterprise.beans.Mapa;
 import br.com.rrc.explore.enterprise.beans.Sonda;
+import br.com.rrc.explore.enterprise.beans.enums.Comando;
+import br.com.rrc.explore.enterprise.beans.enums.Direcao;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = ExploreEnterpriseApplication.class)
@@ -82,6 +81,8 @@ public class TestMissaoController {
 		mapa.setExploradores(exploradores);
 		
 		String json = objectToJson(mapa);
+		
+		System.out.println(json);
 
 		given().
 			contentType(ContentType.JSON).
@@ -92,6 +93,38 @@ public class TestMissaoController {
 			statusCode(HttpStatus.SC_OK);
 
 	}
+	
+	@Test
+	public void exploraTestDimensoesInvalidas() throws IOException {
+
+		int comprimento = -1;
+		int largura = 5;
+		
+		Mapa mapa = new Mapa();
+		Dimensao dimensao = new Dimensao(comprimento, largura);
+		mapa.setDimensao(dimensao);
+		
+		Explorador phoenix = exploradoraPhoenix();
+		Explorador obiter = exploradoraObiter();
+		
+		List<Explorador> exploradores = new ArrayList<>();
+		exploradores.add(phoenix);
+		exploradores.add(obiter);
+		
+		mapa.setExploradores(exploradores);
+		
+		String json = objectToJson(mapa);
+
+		given().
+			contentType(ContentType.JSON).
+			body(json).
+		when().
+			post("/missao/exploracao-detalhada").
+		then().
+			statusCode(HttpStatus.SC_INTERNAL_SERVER_ERROR);
+
+	}
+
 	
 	private Explorador exploradoraPhoenix() {
 

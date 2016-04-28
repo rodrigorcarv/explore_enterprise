@@ -9,13 +9,13 @@ import java.util.regex.Pattern;
 import org.joda.convert.StringConvert;
 import org.springframework.stereotype.Component;
 
-import br.com.rrc.explore.enterprise.beans.Comando;
 import br.com.rrc.explore.enterprise.beans.Coordenada;
 import br.com.rrc.explore.enterprise.beans.Dimensao;
-import br.com.rrc.explore.enterprise.beans.Direcao;
 import br.com.rrc.explore.enterprise.beans.Explorador;
 import br.com.rrc.explore.enterprise.beans.Mapa;
 import br.com.rrc.explore.enterprise.beans.Sonda;
+import br.com.rrc.explore.enterprise.beans.enums.Comando;
+import br.com.rrc.explore.enterprise.beans.enums.Direcao;
 
 /**
  * Classe responsavel por convert as entradas de dos via text plain
