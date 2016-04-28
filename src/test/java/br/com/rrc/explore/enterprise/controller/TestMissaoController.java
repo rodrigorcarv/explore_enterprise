@@ -1,4 +1,4 @@
-package br.com.rrc.explore.enterprise.service;
+package br.com.rrc.explore.enterprise.controller;
 
 import static com.jayway.restassured.RestAssured.given;
 
@@ -121,7 +121,7 @@ public class TestMissaoController {
 		when().
 			post("/missao/exploracao-detalhada").
 		then().
-			statusCode(HttpStatus.SC_INTERNAL_SERVER_ERROR);
+			statusCode(HttpStatus.SC_BAD_REQUEST);
 
 	}
 

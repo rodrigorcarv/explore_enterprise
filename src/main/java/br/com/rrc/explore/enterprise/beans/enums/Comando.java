@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 
+import br.com.rrc.explore.enterprise.exceptions.ComandoInvalidoException;
+
 /**
  * Enum que representa os comandos de controle da Sonda
  * 
@@ -24,8 +26,6 @@ public enum Comando {
 	
 	private String sigla;
 	
-	private static final String MSG_ERRO_COMANDO_INFORMADO_E_INVALIDO = "O(s) comando(s): %s informado(s) s\u00E3o inv\u00E1lidos  ";
-
 	Comando (String sigla) {
 		this.sigla = sigla;
 	}
@@ -39,14 +39,19 @@ public enum Comando {
 	 * da sonda para uma {@link List} de {@link Comando};
 	 * 
 	 * Caso os comandos informados em forma de {@link String} nao 
+	 * constem na lista de enum seram considerados invalidos.
+	 * 
+	 * Para a instrucao ser valida ela nao pode ser nula, vazio ou espaco em branco
 	 * 
 	 * @param comando
 	 * @return {@link List} de {@link Comando}
+	 * @throws ComandoInvalidoException essa excecao pode ocorrer caso a instrucao seja
+	 *         invalida
 	 **/
 	public static List<Comando> parseString2Comando(String instrucao) {
 		
 		if (StringUtils.isBlank(instrucao)) {
-			throw new IllegalArgumentException(String.format(MSG_ERRO_COMANDO_INFORMADO_E_INVALIDO, instrucao));
+			throw new ComandoInvalidoException(instrucao);
 		}
 		
 		char instrucoes[] = instrucao.toCharArray();
@@ -68,6 +73,8 @@ public enum Comando {
 	 * 
 	 * @param instrucao 
 	 * @return {@link Comando}
+	 * @throws ComandoInvalidoException essa excecao pode ocorrer caso a instrucao seja
+	 *         invalida
 	 */
 	public static Comando buscaComando(char instrucao) {
 
@@ -77,6 +84,7 @@ public enum Comando {
 				return comando;
 			}
 		}
-		throw new IllegalArgumentException(String.format(MSG_ERRO_COMANDO_INFORMADO_E_INVALIDO, instrucao));
+		
+		throw new ComandoInvalidoException(instrucao);
 	}
 }

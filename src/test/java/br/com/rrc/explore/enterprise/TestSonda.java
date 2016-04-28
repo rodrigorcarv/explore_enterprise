@@ -7,6 +7,7 @@ import br.com.rrc.explore.enterprise.beans.Coordenada;
 import br.com.rrc.explore.enterprise.beans.Dimensao;
 import br.com.rrc.explore.enterprise.beans.Sonda;
 import br.com.rrc.explore.enterprise.beans.enums.Direcao;
+import br.com.rrc.explore.enterprise.exceptions.DirecaoInvalidaException;
 
 public class TestSonda {
 
@@ -106,7 +107,7 @@ public class TestSonda {
 		Assert.assertEquals(Direcao.NORTE, sonda.getDirecao());
 	}
 	
-	@Test(expected=IllegalArgumentException.class)
+	@Test(expected=DirecaoInvalidaException.class)
 	public void testViraSondaEsquerdaDirecaoNull() {
 		
 		String nome = "Maven";
@@ -115,10 +116,9 @@ public class TestSonda {
 		Sonda sonda = new Sonda(nome, coordenada , null );
 		sonda.virarEsquerda();
 		
-		Assert.fail("Deveria ter sido lancado a exececao IllegalArgumentException ");
 	}
 	
-	@Test(expected=IllegalArgumentException.class)
+	@Test(expected=DirecaoInvalidaException.class)
 	public void testViraSondaDireitaDirecaoNull() {
 		
 		String nome = "Maven";
@@ -126,8 +126,6 @@ public class TestSonda {
 	
 		Sonda sonda = new Sonda(nome, coordenada , null );
 		sonda.virarDireita();
-		
-		Assert.fail("Deveria ter sido lancado a exececao IllegalArgumentException ");
 	}
 	
 
@@ -140,8 +138,6 @@ public class TestSonda {
 		Sonda sonda = new Sonda(nome, coordenada, Direcao.NORTE);
 		Dimensao dimensao = new Dimensao(5, 5);
 		sonda.mover(dimensao);
-		
-		Assert.fail("Deveria ter sido lancado a exececao IllegalArgumentException ");
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
@@ -154,7 +150,6 @@ public class TestSonda {
 		Dimensao dimensao = new Dimensao(5, 5);
 		sonda.mover(dimensao);
 		
-		Assert.fail("Deveria ter sido lancado a exececao IllegalArgumentException ");
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
@@ -166,8 +161,6 @@ public class TestSonda {
 		Sonda sonda = new Sonda(nome, coordenada, Direcao.LESTE);
 		Dimensao dimensao = new Dimensao(5, 5);
 		sonda.mover(dimensao);
-		
-		Assert.fail("Deveria ter sido lancado a exececao IllegalArgumentException ");
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
@@ -179,8 +172,6 @@ public class TestSonda {
 		Sonda sonda = new Sonda(nome, coordenada, Direcao.OESTE);
 		Dimensao dimensao = new Dimensao(5, 5);
 		sonda.mover(dimensao);
-		
-		Assert.fail("Deveria ter sido lancado a exececao IllegalArgumentException ");
 	}
 	
 	@Test

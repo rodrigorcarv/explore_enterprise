@@ -14,6 +14,9 @@ import br.com.rrc.explore.enterprise.beans.Sonda;
 import br.com.rrc.explore.enterprise.beans.enums.Comando;
 import br.com.rrc.explore.enterprise.beans.enums.Direcao;
 import br.com.rrc.explore.enterprise.convert.MapaConvert;
+import br.com.rrc.explore.enterprise.exceptions.ComandoInvalidoException;
+import br.com.rrc.explore.enterprise.exceptions.DirecaoInvalidaException;
+import br.com.rrc.explore.enterprise.exceptions.PosicaoSondaInvalidaException;
 
 public class TestConvert {
 	
@@ -79,7 +82,7 @@ public class TestConvert {
 		Assert.fail("A excecao IllegalArgumentException NAO foi lancada");
 	}
 	
-	@Test(expected=IllegalArgumentException.class)
+	@Test(expected=ComandoInvalidoException.class)
 	public void testMapaConvertComandosIncorretos() {
 		
 		String coodenadas = 
@@ -91,11 +94,9 @@ public class TestConvert {
 		
 		MapaConvert mapaConvert = new MapaConvert();
 		mapaConvert.string2Mapa(coodenadas);
-		
-		Assert.fail("A excecao IllegalArgumentException NAO foi lancada");
 	}
 	
-	@Test(expected=IllegalArgumentException.class)
+	@Test(expected=DirecaoInvalidaException.class)
 	public void testMapaConvertDirecaoIncorreta() {
 		
 		String coodenadas = 
@@ -107,8 +108,6 @@ public class TestConvert {
 		
 		MapaConvert mapaConvert = new MapaConvert();
 		mapaConvert.string2Mapa(coodenadas);
-		
-		Assert.fail("A excecao IllegalArgumentException NAO foi lancada");
 	}
 	
 	

@@ -7,6 +7,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import br.com.rrc.explore.enterprise.beans.enums.Comando;
+import br.com.rrc.explore.enterprise.exceptions.ComandoInvalidoException;
 
 public class TestComando {
 	
@@ -31,12 +32,11 @@ public class TestComando {
 		Assert.assertEquals(Comando.MOVER, Comando.buscaComando(instrucao));
 	}
 
-	@Test (expected=IllegalArgumentException.class)
+	@Test (expected=ComandoInvalidoException.class)
 	public void testBuscarComandoVazio() {
 		
 		char instrucao = ' ';
 		Comando.buscaComando(instrucao);
-		Assert.fail();
 	}
 	
 	@Test
@@ -58,5 +58,19 @@ public class TestComando {
 		comandosExperados.add(Comando.MOVER);
 		
 		Assert.assertEquals(comandosExperados, comandos);
+	}
+	
+	@Test(expected=ComandoInvalidoException.class)
+	public void testParseString2ComandoVazio() {
+		
+		String instrucao = "";
+		Comando.parseString2Comando(instrucao);
+	}
+	
+	@Test(expected=ComandoInvalidoException.class)
+	public void testParseString2ComandoEspacoEmBranco() {
+		
+		String instrucao = " ";
+		Comando.parseString2Comando(instrucao);
 	}
 }

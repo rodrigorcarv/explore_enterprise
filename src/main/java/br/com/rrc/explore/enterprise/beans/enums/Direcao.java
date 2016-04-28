@@ -2,6 +2,7 @@ package br.com.rrc.explore.enterprise.beans.enums;
 
 import br.com.rrc.explore.enterprise.beans.Coordenada;
 import br.com.rrc.explore.enterprise.beans.Dimensao;
+import br.com.rrc.explore.enterprise.exceptions.DirecaoInvalidaException;
 
 /**
  *  Enum para indicar os pontos cardiais 
@@ -96,8 +97,7 @@ public enum Direcao {
 		OESTE.navegar(Direcao.NORTE, Direcao.SUL);
 	}
 	
-	private static final String MSG_ERR0_DIRECAO_NAO_ENCONTRADA = "A direção %s informada não foi encontrada";
-
+	
 	private String descricao;
 	private Direcao direita;
 	private Direcao esquerda;
@@ -122,7 +122,7 @@ public enum Direcao {
 				return bussula;
 			}
 		}
-		throw new IllegalArgumentException(String.format(MSG_ERR0_DIRECAO_NAO_ENCONTRADA, coordenada));
+		throw new DirecaoInvalidaException(coordenada);
 	}
 
 	public String getDescricao() {
@@ -132,7 +132,7 @@ public enum Direcao {
 	public Direcao virarEsqueda(Direcao direcao) {
 		
 		if (direcao == null ) {
-			throw new IllegalArgumentException(String.format(MSG_ERR0_DIRECAO_NAO_ENCONTRADA, direcao));
+			throw new DirecaoInvalidaException(direcao);
 		}
 		
 		return direcao.esquerda;
@@ -141,7 +141,7 @@ public enum Direcao {
 	public Direcao virarDireita(Direcao direcao) {
 		
 		if (direcao == null ) {
-			throw new IllegalArgumentException(String.format(MSG_ERR0_DIRECAO_NAO_ENCONTRADA, direcao));
+			throw new DirecaoInvalidaException(direcao);
 		}
 		
 		return direcao.direita;

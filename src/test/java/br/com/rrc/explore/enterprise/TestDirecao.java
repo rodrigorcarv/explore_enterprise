@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import br.com.rrc.explore.enterprise.beans.enums.Direcao;
+import br.com.rrc.explore.enterprise.exceptions.DirecaoInvalidaException;
 
 public class TestDirecao {
 	
@@ -39,7 +40,7 @@ public class TestDirecao {
 		Assert.assertEquals(Direcao.OESTE, direcaoEnum);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = DirecaoInvalidaException.class)
 	public void testBuscaCoordenadaNull() {
 		
 		String direcao = null;
@@ -47,7 +48,7 @@ public class TestDirecao {
 		Assert.fail();
 	}
 	
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = DirecaoInvalidaException.class)
 	public void testBuscaCoordenadaVazio() {
 		
 		String direcao = "";
@@ -55,7 +56,7 @@ public class TestDirecao {
 		Assert.fail();
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = DirecaoInvalidaException.class)
 	public void testBuscaCoordenadaInvalida() {
 		
 		String direcao = "P";

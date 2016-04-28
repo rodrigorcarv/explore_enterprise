@@ -1,11 +1,10 @@
 package br.com.rrc.explore.enterprise.beans;
 
 import br.com.rrc.explore.enterprise.beans.enums.Direcao;
+import br.com.rrc.explore.enterprise.exceptions.DirecaoInvalidaException;
+import br.com.rrc.explore.enterprise.exceptions.PosicaoSondaInvalidaException;
 
 public class Sonda {
-	
-	private static final String MSG_ERR0_COMANDO_INFORMADO_RESULTARAM_EM_UMA_COORDENADA_INVALDIA = "Os comando informados levam a sonda para um coordena invalida";
-	private static final String MSG_ERR0_DIRECAO_INFORMA_E_INVALIDA = "A direção %s informada \u00E9 invalida";
 	
 	private String id;
 	private String nome;
@@ -59,7 +58,7 @@ public class Sonda {
 	public void virarEsquerda() {
 		
 		if (direcao == null) {
-			throw new IllegalArgumentException(String.format(MSG_ERR0_DIRECAO_INFORMA_E_INVALIDA, direcao));
+			throw new DirecaoInvalidaException(direcao);
 		}
 
 		direcao = direcao.virarEsqueda(direcao);
@@ -68,7 +67,7 @@ public class Sonda {
 	public void virarDireita() {
 		
 		if (direcao == null) {
-			throw new IllegalArgumentException(String.format(MSG_ERR0_DIRECAO_INFORMA_E_INVALIDA, direcao));
+			throw new DirecaoInvalidaException(direcao);
 		}
 		direcao = direcao.virarDireita(direcao);
 	}
@@ -76,11 +75,11 @@ public class Sonda {
 	public void mover(Dimensao dimensao) {
 		
 		if (direcao == null) {
-			throw new IllegalArgumentException(String.format(MSG_ERR0_DIRECAO_INFORMA_E_INVALIDA, direcao));
+			throw new DirecaoInvalidaException(direcao);
 		}
 		
 		if (direcao.isCoordenadaValida(coordenada, dimensao)) {
-			throw new IllegalArgumentException(String.format(MSG_ERR0_COMANDO_INFORMADO_RESULTARAM_EM_UMA_COORDENADA_INVALDIA, coordenada));
+			throw new PosicaoSondaInvalidaException(coordenada, direcao);
 		}
 		
 		direcao.navegar(coordenada);
