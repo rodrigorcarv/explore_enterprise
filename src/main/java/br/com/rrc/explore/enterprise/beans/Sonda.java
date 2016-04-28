@@ -1,5 +1,9 @@
 package br.com.rrc.explore.enterprise.beans;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 import br.com.rrc.explore.enterprise.beans.enums.Direcao;
 import br.com.rrc.explore.enterprise.exceptions.DirecaoInvalidaException;
 import br.com.rrc.explore.enterprise.exceptions.PosicaoSondaInvalidaException;
@@ -8,7 +12,13 @@ public class Sonda {
 	
 	private String id;
 	private String nome;
+	
+	@NotNull(message = "coordenada.requerida")
+	@Valid
 	private Coordenada coordenada;
+	
+	@NotNull(message = "direcao.requerida")
+	@Valid
 	private Direcao direcao;
 	
 	public Sonda() {}
