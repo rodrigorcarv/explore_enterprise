@@ -1,7 +1,6 @@
 package br.com.rrc.explore.enterprise.beans;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import br.com.rrc.explore.enterprise.beans.enums.Direcao;
@@ -66,20 +65,11 @@ public class Sonda {
 	}
 
 	public void virarEsquerda() {
-		
-		if (direcao == null) {
-			throw new DirecaoInvalidaException(direcao);
-		}
-
-		direcao = direcao.virarEsqueda(direcao);
+		direcao = this.direcao.virarEsqueda();
 	}
 	
 	public void virarDireita() {
-		
-		if (direcao == null) {
-			throw new DirecaoInvalidaException(direcao);
-		}
-		direcao = direcao.virarDireita(direcao);
+		direcao = this.direcao.virarDireita();
 	}
 
 	public void mover(Dimensao dimensao) {

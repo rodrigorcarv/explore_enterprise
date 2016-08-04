@@ -5,6 +5,9 @@ import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 
+import br.com.rrc.explore.enterprise.beans.Controle;
+import br.com.rrc.explore.enterprise.beans.VirarDireita;
+import br.com.rrc.explore.enterprise.beans.VirarEsquerda;
 import br.com.rrc.explore.enterprise.exceptions.ComandoInvalidoException;
 
 /**
@@ -20,15 +23,33 @@ import br.com.rrc.explore.enterprise.exceptions.ComandoInvalidoException;
  */
 public enum Comando {
 	
-	ESQUERDA("L"),
-	DIREITA("R"),
-	MOVER("M");
+	ESQUERDA("L"){
+
+		@Override
+		public VirarEsquerda criarControlePorTipoDeComando() {
+			return new VirarEsquerda();
+		} 
+	},
+	DIREITA("R"){
+
+		@Override
+		public Controle criarControlePorTipoDeComando() {
+			return new VirarEsquerda();
+		}
+	},
+	MOVER("M"){
+
+		@Override
+		public Controle criarControlePorTipoDeComando() {
+			return new VirarEsquerda();
+		}
+	};
 	
 	private String sigla;
 	
 	Comando (String sigla) {
 		this.sigla = sigla;
-	}
+	}	
 
 	public String getSigla() {
 		return sigla;
@@ -87,4 +108,28 @@ public enum Comando {
 		
 		throw new ComandoInvalidoException(instrucao);
 	}
+	
+	/**
+	 * Busca no enum {@link Comando} o comnado informado devolvendo o mesmo em forma de 
+	 * {@link Comando}
+	 * Caso nao exista sera exibida a excecao de {@link IllegalArgumentException}.
+	 * 
+	 * @param instrucao 
+	 * @return {@link Comando}
+	 * @throws ComandoInvalidoException essa excecao pode ocorrer caso a instrucao seja
+	 *         invalida
+	 */
+	public static Controle buscaControlePorComando(char instrucao) {
+
+		for (Comando comando : Comando.values()) {
+			
+			if (comando.sigla.equals(String.valueOf(instrucao))){
+				return comando.criarControlePorTipoDeComando();
+			}
+		}
+		
+		throw new ComandoInvalidoException(instrucao);
+	}
+	
+	public abstract Controle criarControlePorTipoDeComando();
 }

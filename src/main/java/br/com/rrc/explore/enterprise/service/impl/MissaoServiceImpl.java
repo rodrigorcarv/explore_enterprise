@@ -9,10 +9,7 @@ import br.com.rrc.explore.enterprise.beans.Coordenada;
 import br.com.rrc.explore.enterprise.beans.Dimensao;
 import br.com.rrc.explore.enterprise.beans.Explorador;
 import br.com.rrc.explore.enterprise.beans.Mapa;
-import br.com.rrc.explore.enterprise.beans.Movimentar;
 import br.com.rrc.explore.enterprise.beans.Sonda;
-import br.com.rrc.explore.enterprise.beans.VirarDireita;
-import br.com.rrc.explore.enterprise.beans.VirarEsquerda;
 import br.com.rrc.explore.enterprise.beans.enums.Comando;
 import br.com.rrc.explore.enterprise.dto.PosicaoDTO;
 import br.com.rrc.explore.enterprise.dto.RelatorioExploracaoDTO;
@@ -27,27 +24,8 @@ public class MissaoServiceImpl implements MissaoService {
 		List<PosicaoDTO> posicaoDTOs = new ArrayList<>();
 
 		for (Comando comando : explorador.getComandos()) {
-
-			switch (comando) {
-
-			case ESQUERDA:
-
-				VirarEsquerda virarEsquerda = new VirarEsquerda();
-				virarEsquerda.executarComando(sonda);
-				break;
-
-			case DIREITA:
-
-				VirarDireita virarDireita = new VirarDireita();
-				virarDireita.executarComando(sonda);
-				break;
-
-			case MOVER:
-
-				Movimentar movimentar = new Movimentar();
-				movimentar.moverSonda(sonda, dimensao);
-				break;
-			}
+			
+			comando.criarControlePorTipoDeComando().executarComando(sonda);
 			
 			Coordenada coordenada = sonda.getCoordenada();
 			

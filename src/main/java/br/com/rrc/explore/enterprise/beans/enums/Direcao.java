@@ -129,22 +129,12 @@ public enum Direcao {
 		return descricao;
 	}
 	
-	public Direcao virarEsqueda(Direcao direcao) {
-		
-		if (direcao == null ) {
-			throw new DirecaoInvalidaException(direcao);
-		}
-		
-		return direcao.esquerda;
+	public Direcao virarEsqueda() {
+		return esquerda;
 	}
 	
-	public Direcao virarDireita(Direcao direcao) {
-		
-		if (direcao == null ) {
-			throw new DirecaoInvalidaException(direcao);
-		}
-		
-		return direcao.direita;
+	public Direcao virarDireita() {
+		return direita;
 	}
 	
 	private void navegar(Direcao direita, Direcao esquerda) {
